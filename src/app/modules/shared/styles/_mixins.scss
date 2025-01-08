@@ -48,9 +48,9 @@
 %button-base {
   @apply px-3 py-2 text-sm font-medium text-center rounded-lg focus:outline-none focus:ring-0 transition duration-300;
 }
-@mixin button-blue {
+@mixin button-green {
   @extend %button-base;
-  @apply text-white bg-blue-700 hover:bg-blue-800 focus:ring-blue-300;
+  @apply text-white bg-green-700 hover:bg-green-800 focus:ring-blue-300;
 }
 @mixin button-red {
   @extend %button-base;
@@ -76,7 +76,7 @@
 // Include all button color variations
 @mixin allButtons() {
   .button {
-    &-blue { @include button-blue; }
+    &-blue { @include button-green; }
     &-red { @include button-red; }
     &-orange { @include button-orange; }
     &-gray { @include button-gray; }
