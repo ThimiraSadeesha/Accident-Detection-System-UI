@@ -1,1 +1,1 @@
-export * from './handle-modals/handle-modals.component'
+export * from './'

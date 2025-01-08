@@ -9,7 +9,7 @@ import { FormsModule } from "@angular/forms";
 @Component({
     selector: 'app-header',
     imports: [
-        NgClass,
+
         FormsModule,
     ],
     templateUrl: './app-header.component.html',
@@ -23,8 +23,11 @@ export class AppHeaderComponent implements OnInit {
   poNumber = signal('');
 
   buttons = [
-    { label: 'Shipments', endpoint: 'shipments', key: 'shi' },
-    { label: 'Purchase Orders', endpoint: 'purchase-orders', key: 'purchase-order' },
+    { label: 'Vehicles', endpoint: 'shipments', key: 'shi' },
+    { label: 'Users', endpoint: 'purchase-orders', key: 'purchase-order' },
+    { label: 'Hospitals', endpoint: 'purchase-orders', key: 'purchase-order' },
+    { label: 'Police', endpoint: 'purchase-orders', key: 'purchase-order' },
+    { label: 'Fire', endpoint: 'purchase-orders', key: 'purchase-order' },
   ];
 
   constructor(private router: Router, private route: ActivatedRoute) { }

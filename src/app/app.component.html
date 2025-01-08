@@ -1,12 +1,8 @@
 <main role="main">
-    <app-handle-modals></app-handle-modals>
+
     <router-outlet></router-outlet>
 </main>
-
-<!--@if (!hideOnPages) {-->
     <app-header></app-header>
-<!--}-->
-
 @if (loadingService.isLoading()) {
     <app-dot-animation [isLoading]="isLoading()"></app-dot-animation>
 }

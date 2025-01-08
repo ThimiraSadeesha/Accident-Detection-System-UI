@@ -5,11 +5,11 @@ import {AppHeaderComponent, AuthService, LoadingService, NotificationService} fr
 import {DotAnimationComponent} from "./core/components/loading/dot-animation/dot-animation.component";
 import {NotificationAlertComponent} from "./core/components/notification/notification-alert.component";
 import {Subscription} from "rxjs";
-import {HandleModalsComponent} from "./modules";
+
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, AppHeaderComponent, DotAnimationComponent, NotificationAlertComponent, HandleModalsComponent],
+  imports: [RouterOutlet, AppHeaderComponent, DotAnimationComponent, NotificationAlertComponent],
   templateUrl: './app.component.html',
   standalone: true,
   styleUrl: './app.component.scss'
