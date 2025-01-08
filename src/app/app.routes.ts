@@ -1,5 +1,5 @@
 import {Routes} from '@angular/router';
-import {TestComponent} from "./modules";
+import {TestComponent, VehiclesViewComponent} from "./modules";
 
 
 
@@ -9,9 +9,10 @@ export const routes: Routes = [
     redirectTo: 'shipments',
     pathMatch: 'full'
   },
+
   {
-    path: 'purchase-orders',
-    component: TestComponent,
+    path: 'shipments',
+    component: VehiclesViewComponent,
 
   },
 

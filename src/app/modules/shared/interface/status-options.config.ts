@@ -4,20 +4,20 @@ export interface StatusOption {
 }
 
 export const PI_STATUS_OPTIONS: StatusOption[] = [
-    { value: 'unavailable', label: 'Unavailable' },
+    { value: '', label: 'Unavailable' },
     { value: 'received', label: 'Received' },
     { value: 'not_received', label: 'Not Received' },
     { value: 'rejected', label: 'Rejected' }
 ];
 
 export const PO_STATUS_OPTIONS: StatusOption[] = [
-    { value: 'unavailable', label: 'Unavailable' },
+    { value: '', label: 'Unavailable' },
     { value: 'sent', label: 'Sent' },
     { value: 'processing', label: 'Processing' }
 ];
 
 export const PAYMENT_STATUS_OPTIONS: StatusOption[] = [
-    { value: 'unavailable', label: 'Unavailable' },
+    { value: '', label: 'Unavailable' },
     { value: 'paid', label: 'Paid' },
     { value: 'unpaid', label: 'Unpaid' },
     { value: 'credit', label: 'Credit' }
@@ -30,7 +30,7 @@ export const SHIPMENT_OPTIONS: StatusOption[] = [
 ];
 
 export const SHIPMENT_STATUS_OPTIONS: StatusOption[] = [
-    { value: 'unavailable', label: 'Unavailable' },
+    { value: '', label: 'Unavailable' },
     { value: 'ongoing', label: 'Ongoing' },
     { value: 'pending', label: 'Pending' },
     { value: 'dispatched', label: 'Dispatched' },
