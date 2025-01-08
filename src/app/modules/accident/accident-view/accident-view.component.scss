@@ -1,0 +1,8 @@
+@use '../../../modules/shared/styles/mixins';
+@include mixins.Grid();
+@include mixins.common();
+@include mixins.statusBatch();
+@include mixins.statusBatch();
+@include mixins.allButtons();
+@include mixins.Modal();
+
