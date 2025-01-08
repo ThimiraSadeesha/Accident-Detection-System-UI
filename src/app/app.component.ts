@@ -7,6 +7,7 @@ import {NotificationAlertComponent} from "./core/components/notification/notific
 import {Subscription} from "rxjs";
 
 
+
 @Component({
   selector: 'app-root',
   imports: [RouterOutlet, AppHeaderComponent, DotAnimationComponent, NotificationAlertComponent],
@@ -30,9 +31,6 @@ export class AppComponent implements OnInit ,OnDestroy {
     public notificationService: NotificationService,
 
   ) {
-    effect(() => {
-
-    });
   }
 
   get notifications() {
