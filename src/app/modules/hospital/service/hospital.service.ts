@@ -1,35 +1,36 @@
-import {BehaviorSubject, catchError, tap} from "rxjs";
-import {Injectable} from "@angular/core";
 import {APIRequestResources, CachedAPIRequest} from "../../../core";
-import {PoliceStation, PoliceStationDTO} from "../interface/police.entity";
+import {Injectable} from "@angular/core";
+import {BehaviorSubject, catchError, tap} from "rxjs";
 import {toSignal} from "@angular/core/rxjs-interop";
 import {HttpClient} from "@angular/common/http";
-import {Router} from "@angular/router";
 import {take} from "rxjs/operators";
+import {Router} from "@angular/router";
+import {Hospital, HospitalDTO} from "../interface/hospital.entity";
 import {handleError} from "../../../core/utils/utils";
 
 
 @Injectable({
     providedIn: 'root'
 })
-export class PoliceService extends CachedAPIRequest {
+export class HospitalService extends CachedAPIRequest {
 
-    private readonly $all = new BehaviorSubject<PoliceStationDTO[]>([])
+    private readonly $all = new BehaviorSubject<HospitalDTO[]>([])
     all = toSignal(this.$all, {initialValue: []})
 
-    private readonly $active = new BehaviorSubject<PoliceStation | undefined>(undefined)
+    private readonly $active = new BehaviorSubject<Hospital | undefined>(undefined)
     active = toSignal(this.$active, {initialValue: undefined})
 
     private readonly $statistics = new BehaviorSubject<any>(undefined)
     stat = toSignal(this.$statistics, {initialValue: undefined})
 
     constructor(protected override http: HttpClient, private router: Router) {
-        super(http, APIRequestResources.PoliceService)
+        super(http, APIRequestResources.HospitalService)
         this.getAll().pipe(take(1)).subscribe()
     }
 
+
     getAll(refresh = true) {
-        return this.get<PoliceStationDTO[]>({}, refresh ? 'freshness' : 'performance')
+        return this.get<HospitalDTO[]>({}, refresh ? 'freshness' : 'performance')
             .pipe(
                 tap(res => this.$all.next(res.data ?? [])),
                 catchError(handleError)
@@ -38,7 +39,7 @@ export class PoliceService extends CachedAPIRequest {
 
 
     getById = (id: string, refresh= true) => {
-        return this.get<PoliceStation>({id}, refresh ? 'freshness' : 'performance')
+        return this.get<Hospital>({id}, refresh ? 'freshness' : 'performance')
             .pipe(
                 tap((res) => this.$active.next(res.data)),
             )
@@ -49,23 +50,21 @@ export class PoliceService extends CachedAPIRequest {
     }
 
 
-    update = (id: number, policedetails: any) => {
+    update = (id: number, hospitalDetails: any) => {
         const options = {suffix: id.toString()};
-        return this.put<any>(policedetails, options).pipe(
+        return this.put<any>(hospitalDetails, options).pipe(
             tap(() => {
                 this.$all.next([])
             })
         );
     }
 
-    create = (police: any) => {
-        return this.post<any>(police, {}).pipe(
+    create = (hospital: any) => {
+        return this.post<any>(hospital, {}).pipe(
             tap(() => {
                 this.$all.next([])
             })
         );
     }
-
-
 
 }

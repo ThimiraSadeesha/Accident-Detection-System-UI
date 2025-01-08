@@ -8,26 +8,29 @@ import { FormsModule } from "@angular/forms";
 
 @Component({
     selector: 'app-header',
-    imports: [
+  imports: [
 
-        FormsModule,
-    ],
+    FormsModule,
+    NgClass,
+  ],
     templateUrl: './app-header.component.html',
     standalone: true,
     styleUrl: './app-header.component.scss'
 })
 export class AppHeaderComponent implements OnInit {
   activeButton = '';
+  activeButtonLabel: string = '';
   authService = inject(AuthService);
   modal = inject(ModalService);
   poNumber = signal('');
 
   buttons = [
-    { label: 'Vehicles', endpoint: 'shipments', key: 'shi' },
-    { label: 'Users', endpoint: 'purchase-orders', key: 'purchase-order' },
-    { label: 'Hospitals', endpoint: 'purchase-orders', key: 'purchase-order' },
-    { label: 'Police', endpoint: 'purchase-orders', key: 'purchase-order' },
-    { label: 'Fire', endpoint: 'purchase-orders', key: 'purchase-order' },
+    { label: 'Home', endpoint: 'home', key: 'shipments' },
+    { label: 'Accidents', endpoint: 'accident', key: 'accident' },
+    { label: 'Vehicles', endpoint: 'vehicle', key: 'vehicle' },
+    { label: 'Hospitals', endpoint: 'hospital', key: 'hospital' },
+    { label: 'Police', endpoint: 'police', key: 'police' },
+    { label: 'Fire', endpoint: 'fire', key: 'fire' },
   ];
 
   constructor(private router: Router, private route: ActivatedRoute) { }
@@ -60,6 +63,12 @@ export class AppHeaderComponent implements OnInit {
 
   navigate(endpoint: string) {
     this.router.navigate([endpoint]);
+    this.buttons = this.buttons.map(button => {
+      if (button.endpoint === endpoint) {
+        this.activeButtonLabel = button.label;
+      }
+      return button;
+    });
   }
 
   logout() {

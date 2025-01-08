@@ -86,7 +86,7 @@
 
 @mixin navigation() {
   .nav-button {
-    @apply px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 transition duration-150 ease-in-out;
+    @apply px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-gray-900 hover:bg-green-50 focus:outline-none focus:text-gray-900 transition duration-150 ease-in-out;
   }
 
   .active-nav-button {
