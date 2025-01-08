@@ -79,7 +79,8 @@
             ],
             "styles": [
               "src/styles.scss",
-              "src/app/modules/shared/styles/_mixins.scss"
+              "src/app/modules/shared/styles/_mixins.scss",
+              "node_modules/leaflet/dist/leaflet.css"
             ],
             "scripts": []
           }

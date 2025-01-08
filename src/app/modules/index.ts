@@ -1,5 +1,4 @@
 export * from './shared/index'
-export * from './test/index'
 export * from './vehicle/index'
 export * from './police/index'
 export * from './insurance/index'

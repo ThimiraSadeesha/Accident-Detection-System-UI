@@ -3,7 +3,6 @@ import {
     AccidentViewComponent, DashboardViewComponent,
     FireViewComponent,
     PoliceViewComponent,
-    TestComponent,
     VehiclesViewComponent
 } from "./modules";
 import {HospitalViewComponent} from "./modules/hospital";
