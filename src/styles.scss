@@ -1,0 +1,11 @@
+@use 'app/modules/shared/styles/mixins';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+body {
+  @apply text-gray-900 bg-[#E5E9F2];
+
+  font-family: "Titillium Web", sans-serif;
+}
+

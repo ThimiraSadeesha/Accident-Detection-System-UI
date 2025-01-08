@@ -1,0 +1,30 @@
+<main role="main">
+    <app-handle-modals></app-handle-modals>
+    <router-outlet></router-outlet>
+</main>
+
+<!--@if (!hideOnPages) {-->
+    <app-header></app-header>
+<!--}-->
+
+@if (loadingService.isLoading()) {
+    <app-dot-animation [isLoading]="isLoading()"></app-dot-animation>
+}
+
+<div class="fixed top-6 z-50 w-full max-w-sm sm:right-40 flex flex-col gap-4">
+    @for (notification of notifications(); track notification.id) {
+        <app-notification-alert
+                [type]="notification.type"
+                [message]="notification.message"
+                [isLeaving]="notification.isLeaving"
+                (close)="notificationService.startLeaveAnimation(notification.id)"
+                class="transform transition-all duration-500 ease-in-out">
+        </app-notification-alert>
+    }
+</div>
+
+<div>
+    <main class="main-content" role="main">
+        <router-outlet></router-outlet>
+    </main>
+</div>
