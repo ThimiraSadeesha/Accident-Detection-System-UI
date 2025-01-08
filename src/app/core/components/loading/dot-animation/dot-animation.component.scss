@@ -1,0 +1,41 @@
+.dot-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  height: 100px;
+}
+
+.dot {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  animation: pulse-rotate 1.5s infinite ease-in-out; /* Reduced from 2s to 1.5s */
+}
+
+.dot:nth-child(1) {
+  background-color: #2f74ff;
+  animation-delay: 0s;
+}
+
+.dot:nth-child(2) {
+  background-color: #2f74ff;
+  animation-delay: 0.3s; /* Reduced from 0.5s to 0.3s */
+}
+
+.dot:nth-child(3) {
+  background-color: #2f74ff;
+  animation-delay: 0.6s; /* Reduced from 1s to 0.6s */
+}
+
+@keyframes pulse-rotate {
+  0%, 100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.5) rotate(180deg);
+    box-shadow: 0 0 15px rgba(51, 135, 255, 0.7);
+  }
+
+}

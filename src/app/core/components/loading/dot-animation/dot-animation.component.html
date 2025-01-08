@@ -1,0 +1,16 @@
+@if (isLoading){
+  <div  class="fixed cursor-wait inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50 flex items-center justify-center">
+    <div class="loading-container">
+      <div class="dot-container">
+        @for (dot of dots(); track dot) {
+        <div class="dot"
+             [style.animation-delay.s]="dot.delay"
+             [style.background-color]="dot.color"
+             [style.animation-duration.s]="_speed()">
+        </div>
+        }
+      </div>
+      <div></div>
+    </div>
+  </div>
+}

@@ -1,0 +1,61 @@
+<div class="main">
+    <div class="overflow-x-auto">
+
+        <div class="flex flex-nowrap items-center space-x-2 overflow-x-auto pb-4 bg-white w-full">
+            <div class="relative  sm:w-auto ">
+                <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                    <svg class="w-4 h-4 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none"
+                         viewBox="0 0 20 20">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+                    </svg>
+                </div>
+                <input type="search"
+                       class="focus:ring-gray-100  focus:border-gray-300 p-2.5  block w-full pl-10 pr-3 py-2 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50"
+                       placeholder="PO Number">
+            </div>
+            <div class="flex-shrink-0">
+                <select
+                        class="selectField focus:ring-gray-100  focus:border-gray-300  w-full"
+
+                >
+                    <option value="" disabled selected>PO Status</option>
+
+                </select>
+            </div>
+            <div class="flex-shrink-0">
+                <button type="submit" class="button-blue  inline-flex items-center whitespace-nowrap"
+                >
+                    <svg class="w-4  h-5 sm:mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                         viewBox="0 0 20 20">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+                    </svg>
+                    <span class="hidden sm:inline">Search</span>
+                </button>
+            </div>
+
+        </div>
+
+        <div class="table-wrapper overflow-x-auto">
+            <table class="table">
+                <thead class="table-thead">
+                <tr>
+                    <th scope="col" class="px-6 py-3">PO Number
+                    <th scope="col" class="px-6 py-3">PI Status
+                    <th scope="col" class="px-6 py-3">PO Status
+                    <th scope="col" class="px-6 py-3">Supplier
+                    <th scope="col" class="px-6 py-3">Remarks
+                    <th scope="col" class="px-6 py-3">Action
+                </tr>
+
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+        </div>
+        <!--        <app-pagination-->
+        <!--                        ></app-pagination>-->
+    </div>
+</div>

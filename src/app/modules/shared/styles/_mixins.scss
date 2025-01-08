@@ -1,0 +1,184 @@
+// Base styles for form elements
+@mixin common (){
+  .main {
+    @apply bg-white rounded-lg mx-6 mt-4 p-4;
+  }
+  .label {
+    @apply absolute text-sm text-gray-600 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-placeholder-shown:scale-100
+    peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2
+    peer-focus:scale-75 peer-focus:-translate-y-4 left-1 whitespace-nowrap;
+  }
+  .textField {
+    @apply w-full p-2 border border-gray-300  rounded-lg;
+  }
+  .errorField {
+    @apply bg-red-50 border border-red-500 text-red-900 placeholder-red-700 text-sm rounded-lg focus:ring-red-500  focus:border-red-500 block w-full p-2.5
+  }
+  .errorLbl {
+    @apply absolute text-sm text-red-900 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] rounded bg-red-100 px-2 peer-focus:px-2 peer-placeholder-shown:scale-100
+    peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2
+    peer-focus:scale-75 peer-focus:-translate-y-4 left-1 whitespace-nowrap;
+  }
+  .selectField {
+    @apply w-full text-sm bg-gray-50 border border-gray-300 text-gray-600 rounded-lg ;
+  }
+  .floating-lbl {
+    @apply absolute text-sm text-gray-500 duration-300 transform -translate-y-3 scale-75 top-1 z-10 origin-[0] bg-white px-2 peer-focus:px-2
+    peer-focus:text-blue-600  peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-1 peer-focus:scale-75 peer-focus:-translate-y-3 start-1 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto;
+  }
+  .floating-btn {
+    @apply block px-2.5 pb-1.5 pt-3 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none;
+  }
+  .required{
+    @apply text-red-600
+  }
+  .searchable-dropdown {
+    @apply relative;
+    .list {
+      @apply z-50 mt-0.5 absolute  bg-white divide-y divide-gray-100 rounded-lg shadow w-full h-fit;
+
+      .item {
+        @apply hover:bg-gray-100 block px-4 py-2 text-sm text-gray-600 cursor-pointer;
+      }
+    }
+  }
+}
+
+// Button styles
+%button-base {
+  @apply px-3 py-2 text-sm font-medium text-center rounded-lg focus:outline-none focus:ring-0 transition duration-300;
+}
+@mixin button-green {
+  @extend %button-base;
+  @apply text-white bg-green-700 hover:bg-green-800 focus:ring-blue-300;
+}
+@mixin button-red {
+  @extend %button-base;
+  @apply text-white bg-red-600 hover:bg-red-700 focus:ring-red-300;
+}
+@mixin button-orange {
+  @extend %button-base;
+  @apply text-white bg-yellow-500 hover:bg-yellow-600 focus:ring-yellow-300;
+}
+
+@mixin button-gray {
+  @extend %button-base;
+  @apply text-gray-700 bg-gray-100 hover:bg-gray-200 focus:ring-gray-100;
+}
+
+@mixin button-disabled {
+  @extend %button-base;
+  @apply text-white bg-blue-400  cursor-not-allowed
+}
+
+
+
+// Include all button color variations
+@mixin allButtons() {
+  .button {
+    &-blue { @include button-green; }
+    &-red { @include button-red; }
+    &-orange { @include button-orange; }
+    &-gray { @include button-gray; }
+    &-disabled { @include button-disabled; }
+  }
+}
+
+@mixin navigation() {
+  .nav-button {
+    @apply px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-gray-900 hover:bg-green-50 focus:outline-none focus:text-gray-900 transition duration-150 ease-in-out;
+  }
+
+  .active-nav-button {
+    @apply bg-gray-100;
+  }
+
+}
+
+// Modal components
+@mixin Modal (){
+  .ModalSelectFooter{
+    @apply px-3 py-2 border border-gray-300 rounded-lg text-sm appearance-none w-48;
+  }
+  .ModalButtonFooter{
+    @apply px-4 py-2 button-blue inline-flex items-center whitespace-nowrap;
+  }
+}
+
+// Table components
+@mixin Grid (){
+  .table {
+    @apply w-full text-sm text-left rtl:text-right text-gray-500 min-w-full;
+  }
+  .table-thead {
+    @apply text-xs text-gray-700  bg-gray-50;
+  }
+}
+
+// Status badge styles
+@mixin statusBatch() {
+  .status-badge {
+    @apply inline-flex justify-center items-center max-w-min min-w-24 text-xs font-medium px-2.5 py-0.5 rounded-lg;
+
+    &::before {
+      content: '';
+      @apply w-1 h-1 me-1 rounded-full;
+    }
+
+    &.received, &.sent, &.paid {
+      @apply bg-green-100 text-green-800;
+      &::before {
+        @apply bg-green-500;
+      }
+    }
+
+    &.unavailable {
+      @apply bg-gray-100 text-gray-800;
+      &::before {
+        @apply bg-gray-500;
+      }
+    }
+
+    &.unpaid, &.not_received, &.rejected {
+      @apply bg-red-100 text-red-800;
+      &::before {
+        @apply bg-red-600;
+      }
+    }
+
+    &.processing, &.credit, {
+      @apply bg-sky-100 text-sky-800;
+      &::before {
+        @apply bg-sky-600;
+      }
+    }
+
+    &.pending {
+      @apply bg-zinc-100 text-zinc-800;
+      &::before {
+        @apply bg-zinc-400;
+      }
+    }
+
+    &.sea{
+      @apply bg-purple-100 text-[#3E2551];
+      &::before {
+        @apply bg-[#A183BF];
+      }
+    }
+
+    &.courier {
+      @apply bg-lime-100 text-lime-800;
+      &::before {
+        @apply bg-lime-500;
+      }
+    }
+
+    &.air {
+      @apply bg-[#FCECCB] text-yellow-700;
+      &::before {
+        @apply bg-[#AD853E];
+      }
+    }
+  }
+}

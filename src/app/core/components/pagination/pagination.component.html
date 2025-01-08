@@ -1,0 +1,36 @@
+<nav class="flex items-center justify-between pt-4" aria-label="Table navigation">
+      <span class="text-sm font-normal text-gray-500  block w-full md:inline md:w-auto">
+        Showing
+        <span class="font-semibold text-gray-900">{{ startItem }}</span>
+        -
+        <span class="font-semibold text-gray-900 ">{{ endItem }}</span>
+        of
+        <span class="font-semibold text-gray-900 ">{{ totalItems }}</span>
+      </span>
+  <ul class="inline-flex -space-x-px rtl:space-x-reverse text-sm h-8">
+    <li>
+      <button (click)="goToPreviousPage()" [disabled]="currentPage === 1"
+              class="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 "
+              [class.cursor-not-allowed]="currentPage === 1">
+        Previous
+      </button>
+    </li>
+    @for (pageNumber of visiblePageNumbers; track pageNumber) {
+      <li>
+        <button (click)="goToPage(pageNumber)"
+                [class]="pageNumber === currentPage ?
+        'flex items-center justify-center px-3 h-8 text-blue-600 border border-blue-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700 ' :
+        'flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700'">
+          {{ pageNumber }}
+        </button>
+      </li>
+    }
+    <li>
+      <button (click)="goToNextPage()" [disabled]="currentPage === totalPages"
+              class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700"
+              [class.cursor-not-allowed]="currentPage === totalPages">
+        Next
+      </button>
+    </li>
+  </ul>
+</nav>

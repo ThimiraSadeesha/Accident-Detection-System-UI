@@ -1,0 +1,23 @@
+<div class="search-container mb-4">
+    <input
+        #latInput
+        type="number"
+        placeholder="Latitude"
+        class="p-2 border rounded mr-2"
+        (input)="updateLat($event)"
+    >
+    <input
+        #lngInput
+        type="number"
+        placeholder="Longitude"
+        class="p-2 border rounded mr-2"
+        (input)="updateLng($event)"
+    >
+    <button
+            (click)="findLocation()"
+            class="px-4 py-2 bg-blue-500 text-white rounded"
+    >
+        Find Location
+    </button>
+</div>
+<div #map id="map" class="h-96 w-full"></div>

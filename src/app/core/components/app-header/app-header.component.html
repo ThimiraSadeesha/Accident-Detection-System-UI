@@ -1,0 +1,35 @@
+<nav class="bg-white rounded-lg mx-6 mt-3 py-2 overflow-auto">
+    <div class="max-w-full mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-3 h-16 items-center">
+            <div class="flex gap-4">
+                @if (activeButtonLabel !== 'Home') {
+                    <button class="whitespace-nowrap button-blue">
+                        Create {{ activeButtonLabel }}
+                    </button>
+                }
+
+
+                <div class="w-[250px]"></div>
+            </div>
+
+            <div class="flex justify-center items-center">
+                <div class="hidden md:flex items-center space-x-4">
+                    @for (button of buttons; track button.key) {
+                        <button
+                                class="nav-button px-3 py-2 space-nowrap"
+                                [ngClass]="{'bg-green-100': activeButton === button.endpoint}"
+                                (click)="navigate(button.endpoint)">
+                            {{ button.label }}
+                        </button>
+                    }
+                </div>
+            </div>
+
+            <div class="flex justify-end">
+                <button type="button" class="button-blue" (click)="logout()">
+                    Exit
+                </button>
+            </div>
+        </div>
+    </div>
+</nav>
