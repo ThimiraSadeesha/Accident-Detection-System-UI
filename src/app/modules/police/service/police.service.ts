@@ -54,16 +54,6 @@ export class PoliceService extends CachedAPIRequest {
         );
     };
 
-
-    // getAll(refresh = true) {
-    //     return this.get<PoliceStationDTO[]>({}, refresh ? 'freshness' : 'performance')
-    //         .pipe(
-    //             tap(res => this.$all.next(res.data ?? [])),
-    //             catchError(handleError)
-    //         )
-    // }
-
-
     getById = (id: string, refresh = true) => {
         return this.get<PoliceStation>({id}, refresh ? 'freshness' : 'performance')
             .pipe(
@@ -74,7 +64,6 @@ export class PoliceService extends CachedAPIRequest {
     initial() {
         this.$active.next(undefined)
     }
-
 
     update = (id: number, policedetails: any) => {
         const options = {suffix: id.toString()};
