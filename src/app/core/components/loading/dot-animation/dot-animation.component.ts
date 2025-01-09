@@ -17,7 +17,7 @@ export class DotAnimationComponent {
     this._speed.set(speed);
   }
 
-  private _colors = signal(['#1c62f8', '#5890ff', '#3379fa']);
+  private _colors = signal(['#6ACF65', '#046307', '#094D1C']);
   protected _speed = signal(0.7);
 
   dots = computed(() =>

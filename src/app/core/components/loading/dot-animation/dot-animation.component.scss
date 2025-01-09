@@ -14,17 +14,17 @@
 }
 
 .dot:nth-child(1) {
-  background-color: #2f74ff;
+  background-color: #6ACF65;
   animation-delay: 0s;
 }
 
 .dot:nth-child(2) {
-  background-color: #2f74ff;
+  background-color: #046307;
   animation-delay: 0.3s; /* Reduced from 0.5s to 0.3s */
 }
 
 .dot:nth-child(3) {
-  background-color: #2f74ff;
+  background-color: #094D1C;
   animation-delay: 0.6s; /* Reduced from 1s to 0.6s */
 }
 
@@ -35,7 +35,7 @@
   }
   50% {
     transform: scale(1.5) rotate(180deg);
-    box-shadow: 0 0 15px rgba(51, 135, 255, 0.7);
+    box-shadow: 0 0 15px rgba(58, 255, 51, 0.62);
   }
 
 }
