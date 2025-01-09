@@ -5,6 +5,7 @@ import {faXmark} from "@fortawesome/free-solid-svg-icons";
 import {FaIconComponent} from "@fortawesome/angular-fontawesome";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {TitleCasePipe} from "@angular/common";
+import {HospitalService} from "../service/hospital.service";
 
 @Component({
   selector: 'app-hospital-view',
@@ -20,13 +21,13 @@ import {TitleCasePipe} from "@angular/common";
   styleUrl: './hospital-view.component.scss'
 })
 export class HospitalViewComponent {
-  policeService = inject(PoliceService)
+  hospitalService = inject(HospitalService)
   notification = inject(NotificationService);
   loading = inject(LoadingService);
   totalItems = signal(0);
   pageNumber = signal(1);
   itemsPerPage = signal(10);
-  policeId = signal(0)
+  hospitalId = signal(0)
   createModal = signal(false)
   updateModal = signal(false)
 
@@ -37,7 +38,7 @@ export class HospitalViewComponent {
     page_number: 1,
   }
 
-  policeDTO = {
+  hospitalDTO = {
     id: 0,
     code: '',
     name: '',
@@ -51,7 +52,7 @@ export class HospitalViewComponent {
 
   constructor() {
     effect(() => {
-      const pagination = this.policeService.stat()
+      const pagination = this.hospitalService.stat()
       if (pagination) {
         this.itemsPerPage.set(pagination.itemsPerPage)
         this.pageNumber.set(pagination.pageNumber)
@@ -59,22 +60,22 @@ export class HospitalViewComponent {
       }
     });
     effect(() => {
-      const police = this.policeService.active()
+      const police = this.hospitalService.active()
       if (police) {
-        this.policeDTO.id = police.policeId
-        this.policeDTO.code = police.PoliceCode
-        this.policeDTO.name = police.PoliceName
-        this.policeDTO.contactNumber = police.contactNumber
-        this.policeDTO.city = police.city
-        this.policeDTO.district = police.district
-        this.policeDTO.province = police.province
-        this.policeDTO.areaCovered = police.areaCovered
+        this.hospitalDTO.id = police.hospitalId
+        this.hospitalDTO.code = police.hospitalCode
+        this.hospitalDTO.name = police.hospitalName
+        this.hospitalDTO.contactNumber = police.contactNumber
+        this.hospitalDTO.city = police.city
+        this.hospitalDTO.district = police.district
+        this.hospitalDTO.province = police.province
+        this.hospitalDTO.areaCovered = police.coverdArea
       }
     });
   }
 
   fetchPolice() {
-    this.policeService.find(this.searchParams).subscribe()
+    this.hospitalService.find(this.searchParams).subscribe()
   }
 
 
@@ -98,10 +99,10 @@ export class HospitalViewComponent {
 
   openUpdateModal(policeId: number) {
     this.createModal.set(true);
-    this.policeId.set(policeId);
+    this.hospitalId.set(policeId);
     if (policeId > 0) {
       this.updateModal.set(true);
-      this.policeService.getById(String(policeId)).subscribe()
+      this.hospitalService.getById(String(policeId)).subscribe()
 
     }
 
@@ -109,8 +110,8 @@ export class HospitalViewComponent {
 
   closeModal() {
     this.createModal.set(false);
-    this.policeId.set(0);
-    this.policeDTO = {
+    this.hospitalId.set(0);
+    this.hospitalDTO = {
       id: 0,
       code: '',
       name: '',
@@ -125,34 +126,34 @@ export class HospitalViewComponent {
 
   update() {
     this.loading.set(true);
-    if (this.policeId() > 0) {
-      this.policeService.update(this.policeId(), this.policeDTO).subscribe(
+    if (this.hospitalId() > 0) {
+      this.hospitalService.update(this.hospitalId(), this.hospitalDTO).subscribe(
           {
             next: (response) => {
               this.notification.set({
                 type: 'success',
-                message: `Failed to update this Police Station successfully`
+                message: `Failed to update this Hospital successfully`
               });
               this.fetchPolice();
               this.loading.set(false);
 
             },
             error: (err: any) => {
-              this.notification.set({type: 'error', message: `Failed to Update Police Station`});
+              this.notification.set({type: 'error', message: `Failed to Update Hospital`});
               console.error(err);
               this.loading.set(false);
             }
           }
       )
     } else {
-      this.policeService.create(this.policeDTO).subscribe({
+      this.hospitalService.create(this.hospitalDTO).subscribe({
         next: (response) => {
-          this.notification.set({type: 'success', message: `New Police Station saved successfully`});
+          this.notification.set({type: 'success', message: `New Hospital saved successfully`});
           // this.fetchPolice();
           this.loading.set(false);
         },
         error: (err: any) => {
-          this.notification.set({type: 'error', message: `Failed to Add Police Station`});
+          this.notification.set({type: 'error', message: `Failed to Add Hospital`});
           console.error(err);
           this.loading.set(false);
         }

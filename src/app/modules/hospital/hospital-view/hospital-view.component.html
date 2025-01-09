@@ -11,7 +11,7 @@
                 </div>
                 <input type="search" [(ngModel)]="searchParams.code"
                        class="focus:ring-gray-100 focus:border-gray-300 p-2.5 block w-full pl-10 pr-3 py-2 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50"
-                       placeholder="Police Code">
+                       placeholder="City">
             </div>
 
             <div class="relative sm:w-auto">
@@ -24,7 +24,7 @@
                 </div>
                 <input type="search" [(ngModel)]="searchParams.name"
                        class="focus:ring-gray-100 focus:border-gray-300 p-2.5 block w-full pl-10 pr-3 py-2 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50"
-                       placeholder="Police Name">
+                       placeholder="Hospital Name">
             </div>
             <div class="flex-shrink-0">
                 <button type="submit" class="button-blue  inline-flex items-center whitespace-nowrap"
@@ -43,7 +43,7 @@
 
             <div class="flex-shrink-0 ml-auto">
                 <button type="submit" class="button-blue inline-flex items-center whitespace-nowrap"
-                        (click)="openUpdateModal(0)">Add New Police
+                        (click)="openUpdateModal(0)">Add New Hospital
                 </button>
             </div>
         </div>
@@ -64,7 +64,7 @@
 
                 </thead>
                 <tbody>
-                    @for (POs of policeService.all(); track POs.id) {
+                    @for (POs of hospitalService.all(); track POs.id) {
                         <tr class="bg-white border-b">
                             <td class="px-6 py-2 text-sm">{{ POs.code | titlecase }}
                             <td class="px-6 py-2 text-sm">{{ POs.name | titlecase }}
@@ -87,9 +87,9 @@
                         <tr class="bg-white border-b">
                             <td colspan="9" class="px-6 py-10">
                                 <div class="flex flex-col items-center justify-center text-center">
-                                    <p class="text-xl font-semibold text-gray-700 mb-2">No Police
+                                    <p class="text-xl font-semibold text-gray-700 mb-2">No Hospital
                                         Found</p>
-                                    <p class="text-gray-500">We couldn't find any Police Stations that match
+                                    <p class="text-gray-500">We couldn't find any Hospital that match
                                         your search criteria.</p>
                                     <button (click)="clear() "
                                             class="mt-4 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition duration-300 ease-in-out">
@@ -115,9 +115,9 @@
                 <div class="flex items-center justify-between p-4 border-b border-gray-200">
                     <h2 class="text-lg font-semibold">
                         @if (updateModal()) {
-                            Edit Police Station
+                            Edit Hospital Station
                         } @else {
-                            Create New Police Station
+                            Create New Hospital Station
                         }
                     </h2>
                     <button (click)="closeModal()" class="p-2 hover:bg-gray-100 rounded-full">
@@ -129,22 +129,22 @@
                     <div class="space-y-4">
                         <div class="grid grid-cols-2 gap-4">
                             <div class="relative">
-                                <input type="text" [(ngModel)]="policeDTO.code"
+                                <input type="text" [(ngModel)]="hospitalDTO.code"
                                        class="focus:ring-gray-100 focus:border-gray-300 p-2.5 block w-full  text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50"
-                                       placeholder="Police Code">
+                                       placeholder="Hospital Code">
                             </div>
                             <div class="relative">
-                                <input type="text" [(ngModel)]="policeDTO.name"
+                                <input type="text" [(ngModel)]="hospitalDTO.name"
                                        class="focus:ring-gray-100 focus:border-gray-300 p-2.5 block w-full  text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50"
-                                       placeholder="Police Name">
+                                       placeholder="Hospital Name">
                             </div>
                             <div class="relative">
-                                <input type="text" [(ngModel)]="policeDTO.contactNumber"
+                                <input type="text" [(ngModel)]="hospitalDTO.contactNumber"
                                        class="focus:ring-gray-100 focus:border-gray-300 p-2.5 block w-full  text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50"
                                        placeholder="Contact Number">
                             </div>
                             <div class="relative">
-                                <input type="text" [(ngModel)]="policeDTO.city"
+                                <input type="text" [(ngModel)]="hospitalDTO.city"
                                        class="focus:ring-gray-100 focus:border-gray-300 p-2.5 block w-full  text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50"
                                        placeholder="City">
                             </div>
@@ -152,17 +152,17 @@
 
                         <div class="grid grid-cols-2 gap-4">
                             <div class="relative">
-                                <input type="text" [(ngModel)]="policeDTO.district"
+                                <input type="text" [(ngModel)]="hospitalDTO.district"
                                        class="focus:ring-gray-100 focus:border-gray-300  block w-full  text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50"
                                        placeholder="District">
                             </div>
                             <div class="relative">
-                                <input type="text" [(ngModel)]="policeDTO.province"
+                                <input type="text" [(ngModel)]="hospitalDTO.province"
                                        class="focus:ring-gray-100 focus:border-gray-300 p-2.5 block w-full  text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50"
                                        placeholder="Province">
                             </div>
                             <div class="relative">
-                                <input type="text" [(ngModel)]="policeDTO.areaCovered"
+                                <input type="text" [(ngModel)]="hospitalDTO.areaCovered"
                                        class="focus:ring-gray-100 focus:border-gray-300 p-2.5 block w-full  text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50"
                                        placeholder="Area">
                             </div>
@@ -176,9 +176,9 @@
                             <button (click)="update()"
                                     class="px-4 py-2 text-sm font-medium text-white bg-green-600 hover:bg-green-700 rounded-lg">
                                 @if (updateModal()) {
-                                    Update Police
+                                    Update Hospital
                                 } @else {
-                                    Create Police
+                                    Create Hospital
                                 }
                             </button>
                         </div>

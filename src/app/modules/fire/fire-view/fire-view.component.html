@@ -11,7 +11,7 @@
                 </div>
                 <input type="search" [(ngModel)]="searchParams.code"
                        class="focus:ring-gray-100 focus:border-gray-300 p-2.5 block w-full pl-10 pr-3 py-2 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50"
-                       placeholder="Police Code">
+                       placeholder="Fire Code">
             </div>
 
             <div class="relative sm:w-auto">
@@ -24,7 +24,7 @@
                 </div>
                 <input type="search" [(ngModel)]="searchParams.name"
                        class="focus:ring-gray-100 focus:border-gray-300 p-2.5 block w-full pl-10 pr-3 py-2 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50"
-                       placeholder="Police Name">
+                       placeholder="Fire Name">
             </div>
             <div class="flex-shrink-0">
                 <button type="submit" class="button-blue  inline-flex items-center whitespace-nowrap"
@@ -43,7 +43,7 @@
 
             <div class="flex-shrink-0 ml-auto">
                 <button type="submit" class="button-blue inline-flex items-center whitespace-nowrap"
-                        (click)="openUpdateModal(0)">Add New Police
+                        (click)="openUpdateModal(0)">Add New Fire
                 </button>
             </div>
         </div>
@@ -64,17 +64,17 @@
 
                 </thead>
                 <tbody>
-                    @for (POs of policeService.all(); track POs.id) {
+                    @for (fire of fireService.all(); track fire.id) {
                         <tr class="bg-white border-b">
-                            <td class="px-6 py-2 text-sm">{{ POs.code | titlecase }}
-                            <td class="px-6 py-2 text-sm">{{ POs.name | titlecase }}
-                            <td class="px-6 py-2 text-sm">{{ POs.mobileNumber }}
-                            <td class="px-6 py-2 text-sm">{{ POs.city | titlecase }}
-                            <td class="px-6 py-2 text-sm">{{ POs.district | titlecase }}
-                            <td class="px-6 py-2 text-sm">{{ POs.province | titlecase }}
+                            <td class="px-6 py-2 text-sm">{{ fire.code | titlecase }}
+                            <td class="px-6 py-2 text-sm">{{ fire.name | titlecase }}
+                            <td class="px-6 py-2 text-sm">{{ fire.mobileNumber }}
+                            <td class="px-6 py-2 text-sm">{{ fire.city | titlecase }}
+                            <td class="px-6 py-2 text-sm">{{ fire.district | titlecase }}
+                            <td class="px-6 py-2 text-sm">{{ fire.province | titlecase }}
                             <td class="px-6 py-4">
                                 <svg width="20" height="20" class="cursor-pointer"
-                                     viewBox="0 0 20 20" fill="none" (click)="openUpdateModal(POs.id)"
+                                     viewBox="0 0 20 20" fill="none" (click)="openUpdateModal(fire.id)"
                                      xmlns="http://www.w3.org/2000/svg">
                                     <path d="M11 14H10V10H9M10 6H10.01M19 10C19 11.1819 18.7672 12.3522 18.3149 13.4442C17.8626 14.5361 17.1997 15.5282 16.364 16.364C15.5282 17.1997 14.5361 17.8626 13.4442 18.3149C12.3522 18.7672 11.1819 19 10 19C8.8181 19 7.64778 18.7672 6.55585 18.3149C5.46392 17.8626 4.47177 17.1997 3.63604 16.364C2.80031 15.5282 2.13738 14.5361 1.68508 13.4442C1.23279 12.3522 1 11.1819 1 10C1 7.61305 1.94821 5.32387 3.63604 3.63604C5.32387 1.94821 7.61305 1 10 1C12.3869 1 14.6761 1.94821 16.364 3.63604C18.0518 5.32387 19 7.61305 19 10Z"
                                           stroke="#28a745" stroke-width="2" stroke-linecap="round"
@@ -87,9 +87,9 @@
                         <tr class="bg-white border-b">
                             <td colspan="9" class="px-6 py-10">
                                 <div class="flex flex-col items-center justify-center text-center">
-                                    <p class="text-xl font-semibold text-gray-700 mb-2">No Police
+                                    <p class="text-xl font-semibold text-gray-700 mb-2">No Fire
                                         Found</p>
-                                    <p class="text-gray-500">We couldn't find any Police Stations that match
+                                    <p class="text-gray-500">We couldn't find any Fire Stations that match
                                         your search criteria.</p>
                                     <button (click)="clear() "
                                             class="mt-4 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition duration-300 ease-in-out">
@@ -115,9 +115,9 @@
                 <div class="flex items-center justify-between p-4 border-b border-gray-200">
                     <h2 class="text-lg font-semibold">
                         @if (updateModal()) {
-                            Edit Police Station
+                            Edit Fire Station
                         } @else {
-                            Create New Police Station
+                            Create New Fire Station
                         }
                     </h2>
                     <button (click)="closeModal()" class="p-2 hover:bg-gray-100 rounded-full">
@@ -129,22 +129,22 @@
                     <div class="space-y-4">
                         <div class="grid grid-cols-2 gap-4">
                             <div class="relative">
-                                <input type="text" [(ngModel)]="policeDTO.code"
+                                <input type="text" [(ngModel)]="fireDTO.code"
                                        class="focus:ring-gray-100 focus:border-gray-300 p-2.5 block w-full  text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50"
-                                       placeholder="Police Code">
+                                       placeholder="Fire Code">
                             </div>
                             <div class="relative">
-                                <input type="text" [(ngModel)]="policeDTO.name"
+                                <input type="text" [(ngModel)]="fireDTO.name"
                                        class="focus:ring-gray-100 focus:border-gray-300 p-2.5 block w-full  text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50"
-                                       placeholder="Police Name">
+                                       placeholder="Fire Name">
                             </div>
                             <div class="relative">
-                                <input type="text" [(ngModel)]="policeDTO.contactNumber"
+                                <input type="text" [(ngModel)]="fireDTO.contactNumber"
                                        class="focus:ring-gray-100 focus:border-gray-300 p-2.5 block w-full  text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50"
                                        placeholder="Contact Number">
                             </div>
                             <div class="relative">
-                                <input type="text" [(ngModel)]="policeDTO.city"
+                                <input type="text" [(ngModel)]="fireDTO.city"
                                        class="focus:ring-gray-100 focus:border-gray-300 p-2.5 block w-full  text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50"
                                        placeholder="City">
                             </div>
@@ -152,17 +152,17 @@
 
                         <div class="grid grid-cols-2 gap-4">
                             <div class="relative">
-                                <input type="text" [(ngModel)]="policeDTO.district"
+                                <input type="text" [(ngModel)]="fireDTO.district"
                                        class="focus:ring-gray-100 focus:border-gray-300  block w-full  text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50"
                                        placeholder="District">
                             </div>
                             <div class="relative">
-                                <input type="text" [(ngModel)]="policeDTO.province"
+                                <input type="text" [(ngModel)]="fireDTO.province"
                                        class="focus:ring-gray-100 focus:border-gray-300 p-2.5 block w-full  text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50"
                                        placeholder="Province">
                             </div>
                             <div class="relative">
-                                <input type="text" [(ngModel)]="policeDTO.areaCovered"
+                                <input type="text" [(ngModel)]="fireDTO.areaCovered"
                                        class="focus:ring-gray-100 focus:border-gray-300 p-2.5 block w-full  text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50"
                                        placeholder="Area">
                             </div>
@@ -176,9 +176,9 @@
                             <button (click)="update()"
                                     class="px-4 py-2 text-sm font-medium text-white bg-green-600 hover:bg-green-700 rounded-lg">
                                 @if (updateModal()) {
-                                    Update Police
+                                    Update Fire
                                 } @else {
-                                    Create Police
+                                    Create Fire
                                 }
                             </button>
                         </div>

@@ -5,6 +5,7 @@ import {faXmark} from "@fortawesome/free-solid-svg-icons";
 import {FaIconComponent} from "@fortawesome/angular-fontawesome";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {TitleCasePipe} from "@angular/common";
+import {FireService} from "../service/fire.service";
 
 @Component({
   selector: 'app-fire-view',
@@ -20,13 +21,13 @@ import {TitleCasePipe} from "@angular/common";
   styleUrl: './fire-view.component.scss'
 })
 export class FireViewComponent {
-  policeService = inject(PoliceService)
+  fireService = inject(FireService)
   notification = inject(NotificationService);
   loading = inject(LoadingService);
   totalItems = signal(0);
   pageNumber = signal(1);
   itemsPerPage = signal(10);
-  policeId = signal(0)
+  fireId = signal(0)
   createModal = signal(false)
   updateModal = signal(false)
 
@@ -37,7 +38,7 @@ export class FireViewComponent {
     page_number: 1,
   }
 
-  policeDTO = {
+  fireDTO = {
     id: 0,
     code: '',
     name: '',
@@ -51,7 +52,7 @@ export class FireViewComponent {
 
   constructor() {
     effect(() => {
-      const pagination = this.policeService.stat()
+      const pagination = this.fireService.stat()
       if (pagination) {
         this.itemsPerPage.set(pagination.itemsPerPage)
         this.pageNumber.set(pagination.pageNumber)
@@ -59,22 +60,22 @@ export class FireViewComponent {
       }
     });
     effect(() => {
-      const police = this.policeService.active()
+      const police = this.fireService.active()
       if (police) {
-        this.policeDTO.id = police.policeId
-        this.policeDTO.code = police.PoliceCode
-        this.policeDTO.name = police.PoliceName
-        this.policeDTO.contactNumber = police.contactNumber
-        this.policeDTO.city = police.city
-        this.policeDTO.district = police.district
-        this.policeDTO.province = police.province
-        this.policeDTO.areaCovered = police.areaCovered
+        this.fireDTO.id = police.fireId
+        this.fireDTO.code = police.firelCode
+        this.fireDTO.name = police.fireName
+        this.fireDTO.contactNumber = police.contactNumber
+        this.fireDTO.city = police.city
+        this.fireDTO.district = police.district
+        this.fireDTO.province = police.province
+        this.fireDTO.areaCovered = police.coverdArea
       }
     });
   }
 
   fetchPolice() {
-    this.policeService.find(this.searchParams).subscribe()
+    this.fireService.find(this.searchParams).subscribe()
   }
 
 
@@ -98,10 +99,10 @@ export class FireViewComponent {
 
   openUpdateModal(policeId: number) {
     this.createModal.set(true);
-    this.policeId.set(policeId);
+    this.fireId.set(policeId);
     if (policeId > 0) {
       this.updateModal.set(true);
-      this.policeService.getById(String(policeId)).subscribe()
+      this.fireService.getById(String(policeId)).subscribe()
 
     }
 
@@ -109,8 +110,9 @@ export class FireViewComponent {
 
   closeModal() {
     this.createModal.set(false);
-    this.policeId.set(0);
-    this.policeDTO = {
+    this.updateModal.set(false);
+    this.fireId.set(0);
+    this.fireDTO = {
       id: 0,
       code: '',
       name: '',
@@ -125,34 +127,34 @@ export class FireViewComponent {
 
   update() {
     this.loading.set(true);
-    if (this.policeId() > 0) {
-      this.policeService.update(this.policeId(), this.policeDTO).subscribe(
+    if (this.fireId() > 0) {
+      this.fireService.update(this.fireId(), this.fireDTO).subscribe(
           {
             next: (response) => {
               this.notification.set({
                 type: 'success',
-                message: `Failed to update this Police Station successfully`
+                message: `Failed to update this Fire Station successfully`
               });
               this.fetchPolice();
               this.loading.set(false);
 
             },
             error: (err: any) => {
-              this.notification.set({type: 'error', message: `Failed to Update Police Station`});
+              this.notification.set({type: 'error', message: `Failed to Update Fire Station`});
               console.error(err);
               this.loading.set(false);
             }
           }
       )
     } else {
-      this.policeService.create(this.policeDTO).subscribe({
+      this.fireService.create(this.fireDTO).subscribe({
         next: (response) => {
-          this.notification.set({type: 'success', message: `New Police Station saved successfully`});
+          this.notification.set({type: 'success', message: `New Fire Station saved successfully`});
           // this.fetchPolice();
           this.loading.set(false);
         },
         error: (err: any) => {
-          this.notification.set({type: 'error', message: `Failed to Add Police Station`});
+          this.notification.set({type: 'error', message: `Failed to Add Fire Station`});
           console.error(err);
           this.loading.set(false);
         }
