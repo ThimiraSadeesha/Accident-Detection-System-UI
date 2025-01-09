@@ -31,6 +31,7 @@ export class AppHeaderComponent implements OnInit {
     { label: 'Hospitals', endpoint: 'hospital', key: 'hospital' },
     { label: 'Police', endpoint: 'police', key: 'police' },
     { label: 'Fire', endpoint: 'fire', key: 'fire' },
+    { label: 'Insurance', endpoint: 'insurance', key: 'insurance' },
   ];
 
   constructor(private router: Router, private route: ActivatedRoute) { }
