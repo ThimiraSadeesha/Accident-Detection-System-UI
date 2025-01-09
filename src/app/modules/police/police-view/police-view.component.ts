@@ -94,11 +94,13 @@ export class PoliceViewComponent {
             items_per_page: 10,
             page_number: 1,
         }
+        this.updateModal.set(false);
         this.fetchPolice();
     }
 
     openUpdateModal(policeId: number) {
         this.createModal.set(true);
+        this.updateModal.set(false);
         this.policeId.set(policeId);
         if (policeId > 0) {
             this.updateModal.set(true);
@@ -110,6 +112,7 @@ export class PoliceViewComponent {
 
     closeModal() {
         this.createModal.set(false);
+        this.updateModal.set(false);
         this.policeId.set(0);
         this.policeDTO = {
             id: 0,
@@ -136,6 +139,7 @@ export class PoliceViewComponent {
                         });
                         this.fetchPolice();
                         this.loading.set(false);
+                        this.updateModal.set(false);
 
                     },
                     error: (err: any) => {
@@ -149,7 +153,8 @@ export class PoliceViewComponent {
             this.policeService.create(this.policeDTO).subscribe({
                 next: (response) => {
                     this.notification.set({type: 'success', message: `New Police Station saved successfully`});
-                    // this.fetchPolice();
+                    this.fetchPolice();
+                    this.updateModal.set(false);
                     this.loading.set(false);
                 },
                 error: (err: any) => {
