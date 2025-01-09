@@ -40,6 +40,8 @@ export class LoadingService {
   }
 }
 
+
+
 // Proper usage of loading service - @tharuka
 // NOTE: for initial data fetch use {immediate}
 

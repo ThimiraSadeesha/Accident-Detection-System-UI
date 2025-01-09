@@ -19,3 +19,15 @@ export interface PoliceStation{
     province: string;
     areaCovered: string;
 }
+
+export interface PoliceFind{
+    id: number;
+    code: string;
+    name: string;
+    mobileNumber: string;
+    area: string;
+    city: string;
+    district: string;
+    province: string;
+}
+
