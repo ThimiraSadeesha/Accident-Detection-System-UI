@@ -4,14 +4,13 @@ import {MapComponent} from "../../shared/components/map/map.component";
 import {LoadingService} from "../../../core";
 import {ChartService} from "../service/chart.service";
 import {AccidentBarChartComponent} from "../../shared/components/accident-bar-chart/accident-bar-chart.component";
+import {AccidentChartComponent} from "../../shared/components/accident-chart/accident-chart.component";
 
 @Component({
     selector: 'app-dashboard-view',
     imports: [
-        TestChartComponent,
-        MapComponent,
         AccidentBarChartComponent,
-
+        AccidentChartComponent,
 
     ],
     templateUrl: './dashboard-view.component.html',
