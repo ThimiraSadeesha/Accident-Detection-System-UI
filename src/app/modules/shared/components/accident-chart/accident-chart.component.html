@@ -1,1 +1,11 @@
-<p>accident-chart works!</p>
+<div style="display: block; align-items: center; justify-content: center; text-align: center;">
+    <div class="items-center" style="margin-bottom: 10px;">
+        Incidents Status
+    </div>
+    <canvas
+            baseChart
+            [data]="pieChartData"
+            [options]="pieChartOptions"
+            [type]="chartType">
+    </canvas>
+</div>

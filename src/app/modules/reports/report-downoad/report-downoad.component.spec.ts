@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FireCreateComponent } from './fire-create.component';
+import { ReportDownoadComponent } from './report-downoad.component';
 
-describe('FireCreateComponent', () => {
-  let component: FireCreateComponent;
-  let fixture: ComponentFixture<FireCreateComponent>;
+describe('ReportDownoadComponent', () => {
+  let component: ReportDownoadComponent;
+  let fixture: ComponentFixture<ReportDownoadComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [FireCreateComponent]
+      imports: [ReportDownoadComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(FireCreateComponent);
+    fixture = TestBed.createComponent(ReportDownoadComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

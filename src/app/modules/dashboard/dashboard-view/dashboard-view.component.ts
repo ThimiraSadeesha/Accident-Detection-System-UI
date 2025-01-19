@@ -1,18 +1,35 @@
-import { Component } from '@angular/core';
+import {Component, effect, inject} from '@angular/core';
 import {TestChartComponent} from "../../shared/components/test-chart/test-chart.component";
 import {MapComponent} from "../../shared/components/map/map.component";
+import {LoadingService} from "../../../core";
+import {ChartService} from "../service/chart.service";
+import {AccidentBarChartComponent} from "../../shared/components/accident-bar-chart/accident-bar-chart.component";
+import {AccidentChartComponent} from "../../shared/components/accident-chart/accident-chart.component";
+import {
+    AccidentServirtyChartComponent
+} from "../../shared/components/accident-servirty-chart/accident-servirty-chart.component";
+import {AccidentPopGrdComponent} from "../../shared/components/accident-pop-grd/accident-pop-grd.component";
 
 @Component({
-  selector: 'app-dashboard-view',
-  imports: [
-    TestChartComponent,
-    MapComponent
+    selector: 'app-dashboard-view',
+    imports: [
+        AccidentBarChartComponent,
+        AccidentChartComponent,
+        AccidentServirtyChartComponent,
+        AccidentPopGrdComponent,
 
-  ],
-  templateUrl: './dashboard-view.component.html',
-  standalone: true,
-  styleUrl: './dashboard-view.component.scss'
+    ],
+    templateUrl: './dashboard-view.component.html',
+    standalone: true,
+    styleUrl: './dashboard-view.component.scss'
 })
 export class DashboardViewComponent {
 
+    chartService = inject(ChartService)
+
+    constructor() {
+        effect(() => {
+
+        });
+    }
 }

@@ -1,0 +1,29 @@
+<div class="flex flex-nowrap items-center space-x-2 overflow-x-auto pb-4 bg-white w-full">
+    <div class="table-wrapper overflow-x-auto w-full">
+
+        <table class="table">
+            <thead class="table-thead">
+            <tr>
+                <th scope="col" class="px-6 py-3">Code</th>
+                <th scope="col" class="px-6 py-3">Name</th>
+                <th scope="col" class="px-6 py-3">Contact Number</th>
+                <th scope="col" class="px-6 py-3">City</th>
+                <th scope="col" class="px-6 py-3">District</th>
+                <th scope="col" class="px-6 py-3">Province</th>
+            </tr>
+            </thead>
+            <tbody>
+                @for (POs of hospitalService.all(); track POs.id) {
+                    <tr class="bg-white border-b">
+                        <td class="px-6 py-2 text-sm">{{ POs.code | titlecase }}</td>
+                        <td class="px-6 py-2 text-sm">{{ POs.name | titlecase }}</td>
+                        <td class="px-6 py-2 text-sm">{{ POs.mobileNumber }}</td>
+                        <td class="px-6 py-2 text-sm">{{ POs.city | titlecase }}</td>
+                        <td class="px-6 py-2 text-sm">{{ POs.district | titlecase }}</td>
+                        <td class="px-6 py-2 text-sm">{{ POs.province | titlecase }}</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

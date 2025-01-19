@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { HospitalCreateComponent } from './hospital-create.component';
+import { AccidentPopGrdComponent } from './accident-pop-grd.component';
 
-describe('HospitalCreateComponent', () => {
-  let component: HospitalCreateComponent;
-  let fixture: ComponentFixture<HospitalCreateComponent>;
+describe('AccidentPopGrdComponent', () => {
+  let component: AccidentPopGrdComponent;
+  let fixture: ComponentFixture<AccidentPopGrdComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HospitalCreateComponent]
+      imports: [AccidentPopGrdComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(HospitalCreateComponent);
+    fixture = TestBed.createComponent(AccidentPopGrdComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

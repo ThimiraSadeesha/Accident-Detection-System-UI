@@ -2,7 +2,7 @@ import {Routes} from '@angular/router';
 import {
     AccidentViewComponent, DashboardViewComponent,
     FireViewComponent, InsuranceViewComponent,
-    PoliceViewComponent,
+    PoliceViewComponent, ReportDownoadComponent,
     VehiclesViewComponent
 } from "./modules";
 import {HospitalViewComponent} from "./modules/hospital";
@@ -41,8 +41,8 @@ export const routes: Routes = [
         path: 'hospital',
         component: HospitalViewComponent,
     },{
-        path: 'insurance',
-        component: InsuranceViewComponent,
+        path: 'reports',
+        component: ReportDownoadComponent,
     },
 
 ];

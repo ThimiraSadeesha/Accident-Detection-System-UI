@@ -1,35 +1,41 @@
 <div class="main">
     <div class="overflow-x-auto">
 
-        <div class="flex flex-nowrap items-center space-x-2 overflow-x-auto pb-4 bg-white w-full">
+        <div class="flex flex-nowrap items-center space-x-2 overflow-x-auto pb-4 bg-white w-fit">
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 py-4">
-            <div class="card bg-white border border-gray-300 p-4 rounded-lg shadow-lg">
-                <app-test-chart></app-test-chart>
+        <div class="grid grid-cols-3 gap-4 py-4">
+            <div class="col-span-2 card bg-white border border-gray-300 p-4 rounded-lg shadow-lg">
+                <app-accident-bar-chart></app-accident-bar-chart>
             </div>
             <div class="card bg-white border border-gray-300 p-4 rounded-lg shadow-lg">
-                <app-test-chart></app-test-chart>
-            </div>
-            <div class="card bg-white border border-gray-300 p-4 rounded-lg shadow-lg">
-                <app-test-chart></app-test-chart>
+                <app-accident-chart></app-accident-chart>
             </div>
         </div>
 
-        <!-- New row with two columns for the map -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 py-4">
-            <div class="col-span-1">
-                <div class="card bg-white border border-gray-300 p-4 rounded-lg shadow-lg">
-                    <app-map></app-map>
-                </div>
+
+        <div class="grid grid-cols-3 gap-4 py-4">
+            <div class="card bg-white border border-gray-300 p-4 rounded-lg shadow-lg">
+                <app-accident-servirty-chart></app-accident-servirty-chart>
             </div>
-            <div class="col-span-1">
-                <!-- You can add additional content here for the second column -->
-                <div class="card bg-white border border-gray-300 p-4 rounded-lg shadow-lg">
-                    <p>Additional content for the second column</p>
-                </div>
+            <div class="col-span-2 card bg-white border border-gray-300 p-4 rounded-lg shadow-lg">
+                <app-accident-pop-grd></app-accident-pop-grd>
             </div>
         </div>
+
+<!--        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 py-4">-->
+<!--            <div class="col-span-1">-->
+<!--                <div class="card bg-white border border-gray-300 p-4 rounded-lg shadow-lg">-->
+<!--                    <app-accident-servirty-chart></app-accident-servirty-chart>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="col-span-1">-->
+<!--                <div class="card bg-white border border-gray-300 p-4 rounded-lg shadow-lg">-->
+<!--                    <app-accident-bar-chart></app-accident-bar-chart>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+
 
     </div>
 </div>
