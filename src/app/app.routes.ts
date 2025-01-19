@@ -41,7 +41,7 @@ export const routes: Routes = [
         path: 'hospital',
         component: HospitalViewComponent,
     },{
-        path: 'insurance',
+        path: 'reports',
         component: InsuranceViewComponent,
     },
 
