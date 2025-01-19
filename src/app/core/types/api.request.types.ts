@@ -6,7 +6,8 @@ export type APIRequestResource =
     APIRequestResources.HospitalService |
     APIRequestResources.UserService |
     APIRequestResources.FireService |
-    APIRequestResources.PoliceService
+    APIRequestResources.PoliceService |
+    APIRequestResources.ChartService
 
 
 export type APIRequestMethod = 'delete' | 'get' | 'post' | 'put'

@@ -15,8 +15,8 @@ export class MapComponent implements AfterViewInit {
 
     private map!: L.Map;
     private currentMarker: L.Marker | null = null;
-    private lat: number = 51.505;
-    private lng: number = -0.09;
+    private lat: number = 6.250374;
+    private lng: number = 80.186204;
 
     ngAfterViewInit(): void {
         this.initMap();
@@ -31,17 +31,13 @@ export class MapComponent implements AfterViewInit {
         const tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 18,
             minZoom: 3,
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+            attribution: 'Accident Detection</a>'
         });
 
         tiles.addTo(this.map);
-
-        // Add click event to map
         this.map.on('click', (e: L.LeafletMouseEvent) => {
             this.handleMapClick(e.latlng);
         });
-
-        // Initialize first marker
         this.addMarker([this.lat, this.lng]);
     }
 

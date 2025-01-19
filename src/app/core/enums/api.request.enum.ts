@@ -1,3 +1,5 @@
+import {ChartService} from "../../modules/dashboard/service/chart.service";
+
 export enum APIRequestResources {
   AuthService = 'auth',
   ApplicationService = 'application',
@@ -7,6 +9,7 @@ export enum APIRequestResources {
   UserService ='user',
   FireService ='fire',
   PoliceService ='police',
+  ChartService ='summary',
 
 }
 
