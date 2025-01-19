@@ -1,4 +1,4 @@
-@use '../../../modules/shared/styles/mixins.scss';
+@use '../../../../modules/shared/styles/_mixins.scss';
 @include mixins.Grid();
 @include mixins.common();
 @include mixins.statusBatch();

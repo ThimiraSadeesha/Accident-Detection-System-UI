@@ -8,6 +8,7 @@ import {AccidentChartComponent} from "../../shared/components/accident-chart/acc
 import {
     AccidentServirtyChartComponent
 } from "../../shared/components/accident-servirty-chart/accident-servirty-chart.component";
+import {AccidentPopGrdComponent} from "../../shared/components/accident-pop-grd/accident-pop-grd.component";
 
 @Component({
     selector: 'app-dashboard-view',
@@ -15,6 +16,7 @@ import {
         AccidentBarChartComponent,
         AccidentChartComponent,
         AccidentServirtyChartComponent,
+        AccidentPopGrdComponent,
 
     ],
     templateUrl: './dashboard-view.component.html',
