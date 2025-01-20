@@ -1,18 +1,13 @@
-import {Component} from '@angular/core';
-import {faAddressBook, faBoxes, faChartBar, faHistory, faMoneyBill, faUsers} from "@fortawesome/free-solid-svg-icons";
-import {FaIconComponent} from "@fortawesome/angular-fontawesome";
+import {Component, effect, inject} from '@angular/core';
 import {FormsModule} from "@angular/forms";
-import {PaginationComponent} from "../../../core";
-import {TitleCasePipe} from "@angular/common";
+import {DeviceService} from "../../shared/services/device.service";
+import {EmployeeService} from "../../shared/services/employee.service";
+import {ChartService} from "../../dashboard/service/chart.service";
 
 @Component({
     selector: 'app-report-downoad',
     imports: [
-
         FormsModule,
-        FaIconComponent,
-
-
     ],
     templateUrl: './report-downoad.component.html',
     standalone: true,
@@ -21,8 +16,36 @@ import {TitleCasePipe} from "@angular/common";
 export class ReportDownoadComponent {
 
 
-    protected readonly faChartBar = faChartBar;
-    protected readonly faBoxes = faUsers;
-    protected readonly faUsers = faAddressBook;
-    protected readonly faMoneyBill = faHistory;
+    deviceService = inject(DeviceService)
+    employeeService = inject(EmployeeService)
+    chartService = inject(ChartService)
+
+
+    searchParams = {
+        user_name: '',
+        nic: '',
+        contact_number: '',
+        city: '',
+        district: '',
+        province: '',
+        vehicle_number: '',
+        device_id: '',
+        severity: '',
+        incident_status: '',
+        startDate: '',
+        endDate: '',
+    }
+
+    constructor() {
+        effect(() => {
+            const device = this.deviceService.all()
+            const user = this.employeeService.all()
+        });
+    }
+
+    generateReport() {
+        console.log(this.searchParams)
+    }
+
+
 }

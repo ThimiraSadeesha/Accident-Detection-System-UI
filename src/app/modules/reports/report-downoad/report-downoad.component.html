@@ -3,79 +3,65 @@
         <div class="flex flex-nowrap items-center space-x-2 overflow-x-auto pb-4 bg-white w-full">
             <div class="p-6 bg-white w-full">
                 <div class="flex gap-6 bg-white">
-                    <div class="w-64 flex-shrink-0">
-                        <div class="bg-white rounded-lg border border-primary-100 overflow-hidden">
-                            <nav class="flex flex-col p-2">
-
-                                <button class="px-4 py-2 text-sm font-medium text-left text-gray-700 hover:bg-gray-100 rounded-lg">
-                                    <fa-icon [icon]="faChartBar" class="text-primary-500"></fa-icon>
-                                   Accident Reports
-                                </button>
-                                <button class="px-4 py-2 text-sm font-medium text-left text-gray-700 hover:bg-gray-100 rounded-lg">
-                                    <fa-icon [icon]="faBoxes" class="text-primary-500"></fa-icon>
-                                    User Reports
-                                </button>
-                                <button class="px-4 py-2 text-sm font-medium text-left text-gray-700 hover:bg-gray-100 rounded-lg">
-                                    <fa-icon [icon]="faUsers" class="text-primary-500"></fa-icon>
-                                    Providers Reports
-                                </button>
-                                <button class="px-4 py-2 text-sm font-medium text-left text-gray-700 hover:bg-gray-100 rounded-lg">
-                                    <fa-icon [icon]="faMoneyBill" class="text-primary-500"></fa-icon>
-                                    History
-                                </button>
-                            </nav>
-                        </div>
-                    </div>
-
                     <div class="flex-1">
                         <div class="bg-white rounded-lg border border-primary-100 p-6">
                             <div class="flex justify-between items-center mb-6">
-                                <h2 class="text-lg font-semibold">Sales Reports</h2>
-                                <button class="btn btn-primary">
-                                    <!-- Generate Report Button -->
+                                <h2 class="text-lg font-semibold">Reports</h2>
+                                <button class="btn button-blue" (click)="generateReport()">
+                                    Generate Report Button
                                 </button>
                             </div>
 
                             <div class="space-y-6">
-                                <!-- Report Parameters -->
                                 <div class="border-b border-primary-100 pb-6">
                                     <h3 class="text-sm font-medium mb-4">REPORT PARAMETERS</h3>
                                     <div class="grid grid-cols-2 gap-4">
                                         <div>
-                                            <label class="block text-sm mb-1">Sales Rep</label>
+                                            <label class="block text-sm mb-1">Select Device</label>
                                             <select class="selectField w-full">
-                                                <option value="" disabled hidden selected>Select a Sales Person</option>
+                                                <option value="" disabled hidden selected>Select a Device</option>
+                                                @for (device of deviceService.all(); track device.id) {
+                                                    <option>{{ device.deviceCode }}</option>
+                                                }
                                             </select>
                                         </div>
                                         <div>
-                                            <label class="block text-sm mb-1">Route</label>
-                                            <select class="selectField w-full">
-                                                <option value="" disabled hidden selected>Select a Route</option>
+                                            <label class="block text-sm mb-1">User</label>
+                                            <select class="selectField w-full" [(ngModel)]="searchParams.user_name">
+                                                <option value="" disabled hidden selected>Select a User</option>
+                                                @for (user of employeeService.all(); track user.id) {
+                                                    <option [value]="user.fullName">{{ user.fullName }}</option>
+                                                }
                                             </select>
                                         </div>
                                         <div>
-                                            <label class="block text-sm mb-1">Select Customer</label>
-                                            <select class="selectField w-full">
-                                                <option value="" disabled hidden selected>Select Order Status</option>
-                                                <option value="paid">PAID</option>
-                                                <option value="completed">COMPLETED</option>
+                                            <label class="block text-sm mb-1">Select Status</label>
+                                            <select class="selectField w-full"
+                                                    [(ngModel)]="searchParams.incident_status">
+                                                <option value="" disabled hidden selected>Select Incident Status
+                                                </option>
+                                                <option value="resolve">RESOLVED</option>
+                                                <option value="pending">PENDING</option>
+                                                <option value="active">ACTIVE</option>
                                             </select>
                                         </div>
                                         <div>
-                                            <label class="block text-sm mb-1">Order Status</label>
+                                            <label class="block text-sm mb-1" [(ngModel)]="searchParams.severity">Incident
+                                                Severity</label>
                                             <select class="selectField w-full">
-                                                <option value="" disabled hidden selected>Select Order Status</option>
-                                                <option value="paid">PAID</option>
-                                                <option value="completed">COMPLETED</option>
+                                                <option value="" disabled hidden selected>Select Severity</option>
+                                                <option value="high">HIGH</option>
+                                                <option value="low">LOW</option>
+                                                <option value="medium">MEDIUM</option>
                                             </select>
                                         </div>
                                         <div>
                                             <label class="block text-sm mb-1">Start Date</label>
-                                            <input type="date" name="startDate" required class="selectField w-full">
+                                            <input type="date" name="startDate" [(ngModel)]="searchParams.startDate" required class="selectField w-full">
                                         </div>
                                         <div>
                                             <label class="block text-sm mb-1">End Date</label>
-                                            <input type="date" name="endDate" required class="selectField w-full">
+                                            <input type="date" name="endDate" [(ngModel)]="searchParams.endDate" required class="selectField w-full">
                                         </div>
                                     </div>
                                 </div>

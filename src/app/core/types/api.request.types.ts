@@ -1,4 +1,4 @@
-import {APIRequestResources, ERPRequestResources} from "../enums"
+import {APIRequestResources} from "../enums"
 
 export type APIRequestResource =
     APIRequestResources.AuthService |
@@ -7,6 +7,7 @@ export type APIRequestResource =
     APIRequestResources.UserService |
     APIRequestResources.FireService |
     APIRequestResources.PoliceService |
+    APIRequestResources.DeviceService |
     APIRequestResources.ChartService
 
 
