@@ -7,8 +7,11 @@
                         <div class="bg-white rounded-lg border border-primary-100 p-6">
                             <div class="flex justify-between items-center mb-6">
                                 <h2 class="text-lg font-semibold">Reports</h2>
-                                <button class="btn button-blue" (click)="generateReport()">
-                                    Generate Report Button
+
+                                <button class="btn button-blue" (click)="generateReport()" [class.btn-gray]="isError()"
+                                        [disabled]="isError()">
+                                    Generate Report
+                                    <fa-icon [icon]="faDownload" class="ml-3"></fa-icon>
                                 </button>
                             </div>
 
@@ -56,12 +59,58 @@
                                             </select>
                                         </div>
                                         <div>
+                                            <label class="block text-sm mb-1">Province</label>
+                                            <select
+                                                    class="selectField w-full"
+                                                    (change)="onProvinceChange($event)"
+                                                    [value]="selectedProvince">
+                                                <option value="" disabled>Select Province</option>
+                                                <option *ngFor="let region of regions" [value]="region.province">
+                                                    {{ region.province }}
+                                                </option>
+                                            </select>
+
+
+                                        </div>
+                                        <div>
+                                            <label class="block text-sm mb-1">District</label>
+                                            <select
+                                                    class="selectField w-full"
+                                                    [(ngModel)]="selectedDistrict"
+                                                    [disabled]="!districts.length">
+                                                <option value="" disabled>Select District</option>
+                                                <option *ngFor="let district of districts" [value]="district">
+                                                    {{ district }}
+                                                </option>
+                                            </select>
+                                        </div>
+                                        <div>
                                             <label class="block text-sm mb-1">Start Date</label>
-                                            <input type="date" name="startDate" [(ngModel)]="searchParams.startDate" required class="selectField w-full">
+                                            <input type="date"
+                                                   [(ngModel)]="searchParams.startDate"
+                                                   name="startDate"
+                                                   required
+                                                   #startDate="ngModel"
+                                                   class="selectField w-full"
+                                                   [ngClass]="{'border-red-500': startDate.invalid && (startDate.dirty || startDate.touched)}">
+
+                                            @if (startDate.invalid && (startDate.dirty || startDate.touched)) {
+                                                <p class="text-red-500 text-sm mt-1">Start date is required</p>
+                                            }
                                         </div>
                                         <div>
                                             <label class="block text-sm mb-1">End Date</label>
-                                            <input type="date" name="endDate" [(ngModel)]="searchParams.endDate" required class="selectField w-full">
+                                            <input type="date"
+                                                   [(ngModel)]="searchParams.endDate"
+                                                   name="endDate"
+                                                   required
+                                                   #endDate="ngModel"
+                                                   class="selectField w-full"
+                                                   [ngClass]="{'border-red-500': endDate.invalid && (endDate.dirty || endDate.touched)}">
+
+                                            @if (endDate.invalid && (endDate.dirty || endDate.touched)) {
+                                                <p class="text-red-500 text-sm mt-1">End date is required</p>
+                                            }
                                         </div>
                                     </div>
                                 </div>
