@@ -1,10 +1,12 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import {Component, effect, inject, OnInit, signal} from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router, RouterLink } from "@angular/router";
 import { NgClass, NgIf } from "@angular/common";
-import { filter } from "rxjs";
+import {filter, interval, switchMap} from "rxjs";
 import { AuthService } from "../../services";
 import { ModalService } from "../../../modules/shared/services/modal.service";
 import { FormsModule } from "@angular/forms";
+import {ChartService} from "../../../modules/dashboard/service/chart.service";
+import {NotificationService} from "../../services/notification.service";
 
 @Component({
     selector: 'app-header',
@@ -22,6 +24,8 @@ export class AppHeaderComponent implements OnInit {
   activeButtonLabel: string = '';
   authService = inject(AuthService);
   modal = inject(ModalService);
+  private chartService = inject(ChartService);
+  notification = inject(NotificationService);
   poNumber = signal('');
 
   buttons = [
@@ -34,7 +38,12 @@ export class AppHeaderComponent implements OnInit {
     { label: 'Reports', endpoint: 'reports', key: 'reports' },
   ];
 
-  constructor(private router: Router, private route: ActivatedRoute) { }
+  constructor(private router: Router, private route: ActivatedRoute)
+  {
+    effect(() => {
+      this.triggerRequestEveryFiveSeconds()
+    });
+  }
 
   ngOnInit() {
     this.setActiveButton();
@@ -44,6 +53,25 @@ export class AppHeaderComponent implements OnInit {
       this.setActiveButton();
     });
   }
+
+  triggerRequestEveryFiveSeconds() {
+    interval(8000)
+        .pipe(
+            switchMap(() => this.chartService.getNotification(true))
+        )
+        .subscribe({
+          next: (data) => {
+            this.notification.set({
+              type: 'confirm',
+              message: `New Accident Found!`
+            });
+          },
+          error: (err) => {
+            console.error('Error:', err);
+          }
+        });
+  }
+
 
   downloadPO() {
     if (this.poNumber()) {

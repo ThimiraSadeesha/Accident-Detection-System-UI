@@ -1,10 +1,10 @@
 import {inject, Injectable} from "@angular/core";
 import {APIRequestResources, CachedAPIRequest, LoadingService, PaginationResponse} from "../../../core";
-import {BehaviorSubject, finalize, tap} from "rxjs";
+import {BehaviorSubject, finalize, interval, switchMap, tap} from "rxjs";
 import {toSignal} from "@angular/core/rxjs-interop";
 import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
-import {IncidentChartDTO} from "../interface/chat.entity";
+import {IncidentChartDTO, NotificationDTO} from "../interface/chat.entity";
 import {take} from "rxjs/operators";
 import {FireFind} from "../../fire/interface/fire.entity";
 import {IncidentReportDto} from "../../reports/interface/sri-lanka-regions";
@@ -21,6 +21,9 @@ export class ChartService extends CachedAPIRequest {
 
     private readonly $active = new BehaviorSubject<IncidentChartDTO | undefined>(undefined)
     active = toSignal(this.$active, {initialValue: undefined})
+
+    private readonly $notification = new BehaviorSubject<NotificationDTO | undefined>(undefined)
+    notification = toSignal(this.$notification, {initialValue: undefined})
 
     private readonly $statistics = new BehaviorSubject<any>(undefined)
     stat = toSignal(this.$statistics, {initialValue: undefined})
@@ -45,6 +48,15 @@ export class ChartService extends CachedAPIRequest {
             })
         );
     };
+
+    getNotification = (refresh = true) => {
+        return this.get<NotificationDTO>({endpoint: 'latest'}, refresh ? 'freshness' : 'performance')
+            .pipe(
+                tap((res) => this.$notification.next(res.data)),
+            )
+    }
+
+
 
     getDetails = (refresh = true) => {
         return this.get<IncidentChartDTO>({endpoint: 'chart'}, refresh ? 'freshness' : 'performance')

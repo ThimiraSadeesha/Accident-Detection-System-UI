@@ -5,6 +5,7 @@ import {AppHeaderComponent, AuthService, LoadingService, NotificationService} fr
 import {DotAnimationComponent} from "./core/components/loading/dot-animation/dot-animation.component";
 import {NotificationAlertComponent} from "./core/components/notification/notification-alert.component";
 import {Subscription} from "rxjs";
+import {ChartService} from "./modules/dashboard/service/chart.service";
 
 
 
@@ -18,6 +19,7 @@ import {Subscription} from "rxjs";
 export class AppComponent implements OnInit ,OnDestroy {
 
   private route = inject(ActivatedRoute);
+
 
   private subscriptions: Subscription = new Subscription();
   isLoading = computed(() => this.loadingService.isLoading());
@@ -38,7 +40,6 @@ export class AppComponent implements OnInit ,OnDestroy {
   }
   ngOnInit(): void {
     initFlowbite();
-
     this.subscriptions.add(
       this.router.events.subscribe((event) => {
         if (event instanceof NavigationEnd) {
