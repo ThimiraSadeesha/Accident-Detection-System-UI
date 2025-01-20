@@ -24,6 +24,7 @@
     "@types/googlemaps": "^3.43.3",
     "@types/leaflet": "^1.9.16",
     "chart.js": "^4.4.7",
+    "file-saver": "^2.0.5",
     "flowbite": "^2.5.2",
     "font-awesome": "^4.7.0",
     "leaflet": "^1.9.4",
@@ -31,12 +32,14 @@
     "rxjs": "~7.8.0",
     "tailwindcss-animated": "^1.1.2",
     "tslib": "^2.7.0",
+    "xlsx": "^0.18.5",
     "zone.js": "^0.15.0"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^19.0.5",
     "@angular/cli": "~19.0.5",
     "@angular/compiler-cli": "^19.0.4",
+    "@types/file-saver": "^2.0.7",
     "@types/jasmine": "~4.3.0",
     "autoprefixer": "^10.4.14",
     "jasmine-core": "~4.6.0",
