@@ -55,7 +55,7 @@ export class AppHeaderComponent implements OnInit {
   }
 
   triggerRequestEveryFiveSeconds() {
-    interval(12000)
+    interval(30000) // Trigger every 30 seconds
         .pipe(
             switchMap(() => this.chartService.getNotification(true))
         )
@@ -63,7 +63,7 @@ export class AppHeaderComponent implements OnInit {
           next: (data) => {
             this.notification.set({
               type: 'confirm',
-              message: `New Accident Found!`
+              message: `New Accidents Found!`
             });
           },
           error: (err) => {
@@ -71,7 +71,6 @@ export class AppHeaderComponent implements OnInit {
           }
         });
   }
-
 
   downloadPO() {
     if (this.poNumber()) {

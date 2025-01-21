@@ -3,7 +3,7 @@ import {
     Component,
     effect,
     ElementRef,
-    inject,
+    inject, signal,
     ViewChild
 } from '@angular/core';
 import L from 'leaflet';
@@ -11,6 +11,7 @@ import {AbstractControl, ReactiveFormsModule, ValidationErrors} from "@angular/f
 import {AccidentService} from "../../../accident/service/accident.service";
 import {IncidentGetDTO} from "../../../accident/interface/Incident.entity";
 import {StatusBadgeComponent} from "../status-batch/status-batch.component";
+import {LoadingService, NotificationService} from "../../../../core";
 
 @Component({
     selector: 'app-map',
@@ -27,8 +28,12 @@ export class MapComponent implements AfterViewInit {
     @ViewChild('latInput') private latInput!: ElementRef;
     @ViewChild('lngInput') private lngInput!: ElementRef;
 
+    notification = inject(NotificationService);
+    loading = inject(LoadingService);
+
     private readonly DEFAULT_ZOOM = 13;
     private readonly DEFAULT_COORDS: [number, number] = [6.250374, 80.186204];
+    incidentId = signal(-1)
 
     emptyIncidentEntityDTO: IncidentGetDTO = {
         id: -1,
@@ -110,6 +115,21 @@ export class MapComponent implements AfterViewInit {
         }
     };
 
+    searchParams = {
+        user_name: '',
+        nic: '',
+        contact_number: '',
+        city: '',
+        district: '',
+        province: '',
+        vehicle_number: '',
+        device_id: '',
+        severity: '',
+        incident_status: '',
+        items_per_page: 10,
+        page_number: 1,
+    }
+
     accidentService = inject(AccidentService);
     private map!: L.Map;
     private currentMarker: L.Marker | null = null;
@@ -119,8 +139,10 @@ export class MapComponent implements AfterViewInit {
     constructor() {
         effect(() => {
             // this.incidentGetDTO.pop()
+            this.incidentId.set(-1)
             const accident = this.accidentService.active();
             if (accident?.location) {
+                this.incidentId.set(accident.id)
                 this.emptyIncidentEntityDTO = accident;
                 console.log(this.emptyIncidentEntityDTO)
                 try {
@@ -140,6 +162,12 @@ export class MapComponent implements AfterViewInit {
         this.initMap();
     }
 
+
+    fetchIncident() {
+        this.accidentService.find(this.searchParams, true).subscribe(
+        )
+    }
+
     private initMap(): void {
         this.map = L.map(this.mapContainer.nativeElement, {
             center: [this.lat, this.lng],
@@ -156,6 +184,35 @@ export class MapComponent implements AfterViewInit {
         });
 
         this.addMarker([this.lat, this.lng]);
+    }
+
+
+    notify() {
+        this.loading.set(true);
+        const updateIncident = {
+            hospitalId: this.emptyIncidentEntityDTO.hospital.id,
+            policeId: this.emptyIncidentEntityDTO.police.id,
+            fireId: this.emptyIncidentEntityDTO.fire.id,
+            incidentStatus: 'resolve'
+        }
+        this.accidentService.update(this.incidentId(), updateIncident).subscribe(
+            {
+                next: (res) => {
+                    this.notification.set({
+                        type: 'success',
+                        message: `Update this Incident successfully`
+                    });
+                    this.fetchIncident()
+                    this.loading.set(false);
+                },
+                error: (err: any) => {
+                    this.notification.set({type: 'error', message: `Failed to Update  Incident`});
+                    console.error(err);
+                    this.loading.set(false);
+                }
+            }
+        )
+
     }
 
     private handleMapClick(latlng: L.LatLng): void {
@@ -208,10 +265,11 @@ export class MapComponent implements AfterViewInit {
     }
 
     close(): void {
+        this.incidentId.set(-1)
         this.accidentService.createModal.set(false)
+
         this.accidentService.initial()
     }
-
 
 
 }

@@ -71,6 +71,13 @@ export class AccidentService extends CachedAPIRequest {
             )
     }
 
+    update = (id: number, incident: any) => {
+        const options = {suffix: id.toString()};
+        return this.put<any>(incident, options).pipe(
+
+        );
+    }
+
     initial = () => {
         this.$active.next(undefined)
     }
