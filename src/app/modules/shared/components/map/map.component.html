@@ -1,23 +1,46 @@
-<div class="search-container mb-4">
-    <input
-        #latInput
-        type="number"
-        placeholder="Latitude"
-        class="p-2 border rounded mr-2"
-        (input)="updateLat($event)"
-    >
-    <input
-        #lngInput
-        type="number"
-        placeholder="Longitude"
-        class="p-2 border rounded mr-2"
-        (input)="updateLng($event)"
-    >
-    <button
-            (click)="findLocation()"
-            class="px-4 py-2 bg-blue-500 text-white rounded"
-    >
-        Find Location
-    </button>
+<div id="crud-modal" tabindex="-1" aria-hidden="true"
+     class="fixed inset-0 z-30 flex justify-center items-center overflow-y-auto bg-gray-900 bg-opacity-50">
+    <div class="bg-white rounded-lg shadow-xl max-h-[95vh] w-[80vw] overflow-hidden">
+        <div class="p-6 overflow-y-auto max-h-[calc(95vh-120px)] flex">
+            <!-- Left section -->
+            <div class="w-2/3 pr-4">
+                <div class="space-y-4">
+                    <div class="search-container mb-4">
+                        <!-- Add search bar here if needed -->
+                    </div>
+                    <div #map id="map" class="h-[calc(90vh-160px)] w-full"></div>
+                </div>
+            </div>
+            <!-- Right section -->
+            <div class="w-1/3 bg-gray-100 p-4 rounded-lg">
+                <h2 class="text-lg font-semibold mb-4">Details</h2>
+                <div class="grid grid-cols-1 gap-4">
+                    <!-- Vehicle Details -->
+                    <div>
+                        <h3 class="text-md font-bold">Vehicle Details</h3>
+                        <p><strong>Model:</strong> Ford F-150</p>
+                        <p><strong>Type:</strong> Truck</p>
+                        <p><strong>Number:</strong> EF9012</p>
+                        <p><strong>Year:</strong> 2020</p>
+                    </div>
+                    <!-- User Details -->
+                    <div>
+                        <h3 class="text-md font-bold">User Details</h3>
+                        <p><strong>Full Name:</strong> Thimira Sadeesha</p>
+                        <p><strong>Username:</strong> thimiraS</p>
+                        <p><strong>Status:</strong> ACTIVE</p>
+                        <p><strong>NIC:</strong> 200027601446</p>
+                        <p><strong>Email:</strong> sade gmail.com</p>
+                        <p><strong>Contact:</strong> 0769371701</p>
+                        <p><strong>Gender:</strong> Male</p>
+                        <p><strong>City:</strong> Homagama</p>
+                        <p><strong>District:</strong> Colombo</p>
+                        <p><strong>Province:</strong> Western</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-<div #map id="map" class="h-96 w-full"></div>
+
+

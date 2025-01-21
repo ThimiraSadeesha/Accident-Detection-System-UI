@@ -7,6 +7,7 @@ import {FireService} from "../../../fire/service/fire.service";
 import {faXmark} from "@fortawesome/free-solid-svg-icons";
 import {AccidentService} from "../../service/accident.service";
 import {StatusBadgeComponent} from "../../../shared/components/status-batch/status-batch.component";
+import {MapComponent} from "../../../shared/components/map/map.component";
 
 @Component({
     selector: 'app-incident-view',
@@ -17,7 +18,8 @@ import {StatusBadgeComponent} from "../../../shared/components/status-batch/stat
         TitleCasePipe,
         FormsModule,
         DatePipe,
-        StatusBadgeComponent
+        StatusBadgeComponent,
+        MapComponent
     ],
     templateUrl: './incident-view.component.html',
     standalone: true,
@@ -110,63 +112,5 @@ export class IncidentViewComponent {
 
     }
 
-    closeModal() {
-        this.createModal.set(false);
-        this.updateModal.set(false);
-        this.fireId.set(0);
-        this.fireDTO = {
-            id: 0,
-            code: '',
-            name: '',
-            contactNumber: '',
-            city: '',
-            district: '',
-            province: '',
-            areaCovered: '',
-        }
 
-    }
-
-    update() {
-        // this.loading.set(true);
-        // if (this.fireId() > 0) {
-        //     this.accidentService.update(this.fireId(), this.fireDTO).subscribe(
-        //         {
-        //             next: (response) => {
-        //                 this.notification.set({
-        //                     type: 'success',
-        //                     message: `Failed to update this Fire Station successfully`
-        //                 });
-        //                 this.fetchPolice();
-        //                 this.loading.set(false);
-        //
-        //             },
-        //             error: (err: any) => {
-        //                 this.notification.set({type: 'error', message: `Failed to Update Fire Station`});
-        //                 console.error(err);
-        //                 this.loading.set(false);
-        //             }
-        //         }
-        //     )
-        // } else {
-        //     this.fireService.create(this.fireDTO).subscribe({
-        //         next: (response) => {
-        //             this.notification.set({type: 'success', message: `New Fire Station saved successfully`});
-        //             // this.fetchPolice();
-        //             this.loading.set(false);
-        //         },
-        //         error: (err: any) => {
-        //             this.notification.set({type: 'error', message: `Failed to Add Fire Station`});
-        //             console.error(err);
-        //             this.loading.set(false);
-        //         }
-        //     })
-        //
-        // }
-
-
-    }
-
-
-    protected readonly faXmark = faXmark;
 }
