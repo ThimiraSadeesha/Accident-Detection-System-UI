@@ -12,7 +12,6 @@ import {MapComponent} from "../../../shared/components/map/map.component";
 @Component({
     selector: 'app-incident-view',
     imports: [
-        FaIconComponent,
         PaginationComponent,
         ReactiveFormsModule,
         TitleCasePipe,

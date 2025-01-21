@@ -14,7 +14,6 @@ import { AccidentService } from "../../../accident/service/accident.service";
 @Component({
     selector: 'app-map',
     imports: [
-        FaIconComponent,
         ReactiveFormsModule
     ],
     templateUrl: './map.component.html',

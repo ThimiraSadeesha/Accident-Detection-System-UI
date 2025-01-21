@@ -63,7 +63,7 @@ export class StatusBadgeComponent {
 
     const statusLower = this.status?.toLowerCase() || '';
     return {
-      'bg-green-100 text-green-700': statusLower === 'active' || statusLower === 'completed',
+      'bg-green-100 text-green-700': statusLower === 'active' || statusLower === 'completed'|| statusLower === 'open',
       'bg-yellow-100 text-yellow-700': statusLower === 'resolve',
       'bg-red-100 text-red-700': statusLower === 'pending' || statusLower === 'inactive'
     };
