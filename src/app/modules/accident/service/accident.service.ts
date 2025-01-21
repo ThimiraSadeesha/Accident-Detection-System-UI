@@ -1,4 +1,4 @@
-import {inject, Injectable} from "@angular/core";
+import {inject, Injectable, signal} from "@angular/core";
 import {APIRequestResources, CachedAPIRequest, LoadingService, PaginationResponse} from "../../../core";
 import {BehaviorSubject, finalize, tap} from "rxjs";
 import {toSignal} from "@angular/core/rxjs-interop";
@@ -6,6 +6,7 @@ import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {take} from "rxjs/operators";
 import {IncidentGetBYDTO, IncidentViewDTO} from "../interface/accident.entity";
+import {IncidentGetDTO} from "../interface/Incident.entity";
 
 
 @Injectable({
@@ -13,11 +14,13 @@ import {IncidentGetBYDTO, IncidentViewDTO} from "../interface/accident.entity";
 })
 export class AccidentService extends CachedAPIRequest {
     loading = inject(LoadingService);
+    createModal = signal(false)
+
 
     private readonly $all = new BehaviorSubject<IncidentViewDTO[]>([])
     all = toSignal(this.$all, {initialValue: []})
 
-    private readonly $active = new BehaviorSubject<IncidentGetBYDTO | undefined>(undefined)
+    private readonly $active = new BehaviorSubject<IncidentGetDTO | undefined>(undefined)
     active = toSignal(this.$active, {initialValue: undefined})
 
     private readonly $statistics = new BehaviorSubject<any>(undefined)
@@ -62,9 +65,20 @@ export class AccidentService extends CachedAPIRequest {
     };
 
     getById = (id: string, refresh = true) => {
-        return this.get<IncidentGetBYDTO>({id}, refresh ? 'freshness' : 'performance')
+        return this.get<IncidentGetDTO>({id}, refresh ? 'freshness' : 'performance')
             .pipe(
                 tap((res) => this.$active.next(res.data)),
             )
+    }
+
+    update = (id: number, incident: any) => {
+        const options = {suffix: id.toString()};
+        return this.put<any>(incident, options).pipe(
+
+        );
+    }
+
+    initial = () => {
+        this.$active.next(undefined)
     }
 }

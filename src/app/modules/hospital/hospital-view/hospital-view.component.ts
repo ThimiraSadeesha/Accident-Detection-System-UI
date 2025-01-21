@@ -4,7 +4,7 @@ import {LoadingService, NotificationService, PaginationComponent} from "../../..
 import {faXmark} from "@fortawesome/free-solid-svg-icons";
 import {FaIconComponent} from "@fortawesome/angular-fontawesome";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {TitleCasePipe} from "@angular/common";
+import {NgIf, TitleCasePipe} from "@angular/common";
 import {HospitalService} from "../service/hospital.service";
 
 @Component({
@@ -14,7 +14,8 @@ import {HospitalService} from "../service/hospital.service";
     PaginationComponent,
     ReactiveFormsModule,
     TitleCasePipe,
-    FormsModule
+    FormsModule,
+    NgIf
   ],
   templateUrl: './hospital-view.component.html',
   standalone: true,
@@ -77,6 +78,7 @@ export class HospitalViewComponent {
   fetchPolice() {
     this.hospitalService.find(this.searchParams).subscribe()
   }
+
 
 
   public onPageChange(pageNumber: number): void {
@@ -160,8 +162,6 @@ export class HospitalViewComponent {
       })
 
     }
-
-
   }
 
   protected readonly faXmark = faXmark;

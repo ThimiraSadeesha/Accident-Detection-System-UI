@@ -1,13 +1,20 @@
 import {inject, Injectable} from "@angular/core";
-import {APIRequestResources, CachedAPIRequest, LoadingService, PaginationResponse} from "../../../core";
+import {
+    APIRequestOptions,
+    APIRequestResources,
+    CachedAPIRequest,
+    LoadingService,
+    PaginationResponse
+} from "../../../core";
 import {BehaviorSubject, finalize, interval, switchMap, tap} from "rxjs";
 import {toSignal} from "@angular/core/rxjs-interop";
 import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
-import {IncidentChartDTO, NotificationDTO} from "../interface/chat.entity";
+import {IncidentChartDTO, NotificationDTO, UserDTOLogin} from "../interface/chat.entity";
 import {take} from "rxjs/operators";
 import {FireFind} from "../../fire/interface/fire.entity";
 import {IncidentReportDto} from "../../reports/interface/sri-lanka-regions";
+import {PoliceStation} from "../../police/interface/police.entity";
 
 @Injectable({
     providedIn: 'root'
@@ -21,6 +28,9 @@ export class ChartService extends CachedAPIRequest {
 
     private readonly $active = new BehaviorSubject<IncidentChartDTO | undefined>(undefined)
     active = toSignal(this.$active, {initialValue: undefined})
+
+    private readonly $user = new BehaviorSubject<UserDTOLogin | undefined>(undefined)
+    activeUser = toSignal(this.$user, {initialValue: undefined})
 
     private readonly $notification = new BehaviorSubject<NotificationDTO | undefined>(undefined)
     notification = toSignal(this.$notification, {initialValue: undefined})
@@ -56,14 +66,25 @@ export class ChartService extends CachedAPIRequest {
             )
     }
 
-
-
     getDetails = (refresh = true) => {
         return this.get<IncidentChartDTO>({endpoint: 'chart'}, refresh ? 'freshness' : 'performance')
             .pipe(
                 tap((res) => this.$active.next(res.data)),
             )
     }
+
+
+    login = (credentials: { username: string; password: string }, refresh = true) => {
+        return this.post<UserDTOLogin[]>(
+            refresh ? credentials : 'performance',
+            {
+                body: credentials,
+            } as APIRequestOptions
+        ).pipe();
+    };
+
+
+
 
 
 }

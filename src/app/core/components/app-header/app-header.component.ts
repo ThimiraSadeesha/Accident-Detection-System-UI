@@ -31,7 +31,7 @@ export class AppHeaderComponent implements OnInit {
   buttons = [
     { label: 'Home', endpoint: 'home', key: 'shipments' },
     { label: 'Accidents', endpoint: 'accident', key: 'accident' },
-    { label: 'Vehicles', endpoint: 'vehicle', key: 'vehicle' },
+    // { label: 'Vehicles', endpoint: 'vehicle', key: 'vehicle' },
     { label: 'Hospitals', endpoint: 'hospital', key: 'hospital' },
     { label: 'Police', endpoint: 'police', key: 'police' },
     { label: 'Fire', endpoint: 'fire', key: 'fire' },
@@ -55,7 +55,7 @@ export class AppHeaderComponent implements OnInit {
   }
 
   triggerRequestEveryFiveSeconds() {
-    interval(8000)
+    interval(30000) // Trigger every 30 seconds
         .pipe(
             switchMap(() => this.chartService.getNotification(true))
         )
@@ -63,7 +63,7 @@ export class AppHeaderComponent implements OnInit {
           next: (data) => {
             this.notification.set({
               type: 'confirm',
-              message: `New Accident Found!`
+              message: `New Accidents Found!`
             });
           },
           error: (err) => {
@@ -71,7 +71,6 @@ export class AppHeaderComponent implements OnInit {
           }
         });
   }
-
 
   downloadPO() {
     if (this.poNumber()) {
@@ -101,6 +100,6 @@ export class AppHeaderComponent implements OnInit {
   }
 
   logout() {
-
+    this.router.navigate(['login']);
   }
 }

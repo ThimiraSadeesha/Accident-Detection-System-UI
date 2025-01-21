@@ -1,6 +1,6 @@
 import {Component, effect, inject, signal} from '@angular/core';
 import {PoliceService} from "../service/police.service";
-import {NgClass, TitleCasePipe} from "@angular/common";
+import {NgClass, NgIf, TitleCasePipe} from "@angular/common";
 import {LoadingService, NotificationService, PaginationComponent} from "../../../core";
 import {FormsModule} from "@angular/forms";
 import {FaIconComponent} from "@fortawesome/angular-fontawesome";
@@ -13,7 +13,8 @@ import {faXmark} from "@fortawesome/free-solid-svg-icons";
         TitleCasePipe,
         PaginationComponent,
         FormsModule,
-        FaIconComponent
+        FaIconComponent,
+        NgIf
     ],
     templateUrl: './police-view.component.html',
     standalone: true,
@@ -135,7 +136,7 @@ export class PoliceViewComponent {
                     next: (response) => {
                         this.notification.set({
                             type: 'success',
-                            message: `Failed to update this Police Station successfully`
+                            message: `Updated this Police Station successfully`
                         });
                         this.fetchPolice();
                         this.loading.set(false);

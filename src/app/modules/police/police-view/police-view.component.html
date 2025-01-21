@@ -138,10 +138,24 @@
                                        class="focus:ring-gray-100 focus:border-gray-300 p-2.5 block w-full  text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50"
                                        placeholder="Police Name">
                             </div>
+
                             <div class="relative">
-                                <input type="text" [(ngModel)]="policeDTO.contactNumber"
-                                       class="focus:ring-gray-100 focus:border-gray-300 p-2.5 block w-full  text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50"
+                                <input type="text"
+                                       [(ngModel)]="policeDTO.contactNumber"
+                                       #phone="ngModel"
+                                       required
+                                       pattern="^[0-9]{10}$"
+                                       class="focus:ring-gray-100 focus:border-gray-300 p-2.5 block w-full text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50"
                                        placeholder="Contact Number">
+
+                                <div *ngIf="phone.errors?.['pattern'] && (phone.dirty || phone.touched)"
+                                     class="text-red-500 text-sm mt-1">
+                                    Please enter a valid 10-digit phone number.
+                                </div>
+                                <div *ngIf="phone.errors?.['required'] && (phone.dirty || phone.touched)"
+                                     class="text-red-500 text-sm mt-1">
+                                    Phone number is required.
+                                </div>
                             </div>
                             <div class="relative">
                                 <input type="text" [(ngModel)]="policeDTO.city"
@@ -174,7 +188,8 @@
                                 Cancel
                             </button>
                             <button (click)="update()"
-                                    class="px-4 py-2 text-sm font-medium text-white bg-green-600 hover:bg-green-700 rounded-lg">
+                                    [disabled]="phone.invalid"
+                                    class="disabled:opacity-50 px-4 py-2 text-sm font-medium text-white bg-green-600 hover:bg-green-700 rounded-lg">
                                 @if (updateModal()) {
                                     Update Police
                                 } @else {

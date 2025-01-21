@@ -4,18 +4,19 @@ import {LoadingService, NotificationService, PaginationComponent} from "../../..
 import {faXmark} from "@fortawesome/free-solid-svg-icons";
 import {FaIconComponent} from "@fortawesome/angular-fontawesome";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {TitleCasePipe} from "@angular/common";
+import {NgIf, TitleCasePipe} from "@angular/common";
 import {FireService} from "../service/fire.service";
 
 @Component({
   selector: 'app-fire-view',
-  imports: [
-    FaIconComponent,
-    PaginationComponent,
-    ReactiveFormsModule,
-    TitleCasePipe,
-    FormsModule
-  ],
+    imports: [
+        FaIconComponent,
+        PaginationComponent,
+        ReactiveFormsModule,
+        TitleCasePipe,
+        FormsModule,
+        NgIf
+    ],
   templateUrl: './fire-view.component.html',
   standalone: true,
   styleUrl: './fire-view.component.scss'

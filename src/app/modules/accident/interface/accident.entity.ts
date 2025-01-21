@@ -27,12 +27,12 @@ export interface IncidentGetBYDTO {
     location: string;
     incidentTime: string; // ISO date string
     incidentStatus: string;
-    device: DeviceDto;
-    vehicle: VehicleDto;
+    device: Device;
+    vehicle: Vehicle;
     user: UserDto;
 }
 
-export interface DeviceDto {
+export interface Device {
     id: number;
     type: string;
     userId: number;
@@ -42,7 +42,7 @@ export interface DeviceDto {
     lastMaintenance: string;
 }
 
-export interface VehicleDto {
+export interface Vehicle {
     id: number;
     model: string;
     vehicleType: string;
