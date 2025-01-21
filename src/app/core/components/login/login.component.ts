@@ -28,21 +28,18 @@ export class LoginComponent {
       private router: Router
   ) { }
 
+  // Hardcoded credentials
+  private readonly validUsername: string = 'admin';
+  private readonly validPassword: string = 'admin';
+
 
 
   onSubmit() {
-    const userCredentials = {
-      username: this.username,
-      password: this.password,
-    };
-
-  }
-  triggerError() {
-    this.showError = false;
-    setTimeout(() => this.showError = true, 0);
-  }
-  ngOnDestroy() {
-    if (this.querySub)
-      this.querySub.unsubscribe();
+    // Check against the hardcoded credentials
+    if (this.username === this.validUsername && this.password === this.validPassword) {
+      this.router.navigate(['home']);
+    } else {
+      this.showError = true;
+    }
   }
 }
