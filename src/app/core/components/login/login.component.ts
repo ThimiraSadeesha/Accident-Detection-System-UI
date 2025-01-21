@@ -1,9 +1,11 @@
-import { Component } from '@angular/core';
+import {Component, inject} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {AuthService} from "../../services";
 import {Subscription} from "rxjs";
 import {FormsModule} from "@angular/forms";
 import {NgClass, NgIf} from "@angular/common";
+import {HospitalService} from "../../../modules/hospital/service/hospital.service";
+import {ChartService} from "../../../modules/dashboard/service/chart.service";
 
 @Component({
   selector: 'app-login',
@@ -17,29 +19,45 @@ import {NgClass, NgIf} from "@angular/common";
   styleUrl: './login.component.scss'
 })
 export class LoginComponent {
-  username: string = '';
+
+  chartService = inject(ChartService)
+
+  searchParams = {
+    username: '',
+    password: '',
+  }
+
   password: string = '';
   showError: boolean = false;
-  private querySub: Subscription | undefined;
 
   constructor(
-      private activatedRoute: ActivatedRoute,
-      private authService: AuthService,
       private router: Router
   ) { }
 
-  // Hardcoded credentials
-  private readonly validUsername: string = 'admin';
-  private readonly validPassword: string = 'admin';
-
-
-
   onSubmit() {
-    // Check against the hardcoded credentials
-    if (this.username === this.validUsername && this.password === this.validPassword) {
-      this.router.navigate(['home']);
-    } else {
+    if (!this.searchParams.username || !this.searchParams.password) {
       this.showError = true;
+      console.error('Username and password are required');
+      return;
     }
+
+    const credentials = {
+      username: this.searchParams.username,
+      password: this.searchParams.password
+    };
+
+    this.chartService.login(credentials).subscribe({
+      next: (response) => {
+        this.router.navigate(['home']);
+      },
+      error: (err: any) => {
+        console.error(err);
+        this.showError = true;
+      }
+    });
   }
+
+
+
+
 }

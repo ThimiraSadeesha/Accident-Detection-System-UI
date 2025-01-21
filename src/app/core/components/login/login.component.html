@@ -4,11 +4,11 @@
         <form (ngSubmit)="onSubmit()">
             <div class="mb-6">
                 <label for="username" class="form-label">Username</label>
-                <input type="text" id="username" [(ngModel)]="username" name="username" placeholder="Enter your username" required class="form-input">
+                <input type="text" id="username" [(ngModel)]="searchParams.username" name="username" placeholder="Enter your username" required class="form-input">
             </div>
             <div class="mb-6">
                 <label for="password" class="form-label">Password</label>
-                <input type="password" id="password" [(ngModel)]="password" name="password" placeholder="Enter your password" required class="form-input">
+                <input type="password" id="password" [(ngModel)]="searchParams.password" name="password" placeholder="Enter your password" required class="form-input">
             </div>
             <div *ngIf="showError" class="flex items-center justify-center mb-6">
                 <label class="error-label">Username or Password is Incorrect</label>

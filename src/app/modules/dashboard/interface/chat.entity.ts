@@ -23,3 +23,8 @@ export interface NotificationDTO {
     createdAt: string;
     updatedAt: string;
 }
+
+export interface UserDTOLogin {
+    id: number;
+    userName: string;
+}

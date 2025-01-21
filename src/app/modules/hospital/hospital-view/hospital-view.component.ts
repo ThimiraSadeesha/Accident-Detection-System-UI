@@ -80,6 +80,7 @@ export class HospitalViewComponent {
   }
 
 
+
   public onPageChange(pageNumber: number): void {
     this.searchParams = {
       ...this.searchParams,
@@ -161,8 +162,6 @@ export class HospitalViewComponent {
       })
 
     }
-
-
   }
 
   protected readonly faXmark = faXmark;
