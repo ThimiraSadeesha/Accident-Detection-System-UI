@@ -1,12 +1,16 @@
 import {Component, effect, inject} from '@angular/core';
 import {HospitalService} from "../../../hospital/service/hospital.service";
 import {LoadingService, NotificationService} from "../../../../core";
-import {TitleCasePipe} from "@angular/common";
+import {DatePipe, TitleCasePipe} from "@angular/common";
+import {StatusBadgeComponent} from "../status-batch/status-batch.component";
+import {AccidentService} from "../../../accident/service/accident.service";
 
 @Component({
   selector: 'app-accident-pop-grd',
   imports: [
-    TitleCasePipe
+    TitleCasePipe,
+    DatePipe,
+    StatusBadgeComponent
   ],
   templateUrl: './accident-pop-grd.component.html',
   standalone: true,
@@ -14,44 +18,10 @@ import {TitleCasePipe} from "@angular/common";
 })
 export class AccidentPopGrdComponent {
 
-  hospitalService = inject(HospitalService)
+  accidentService = inject(AccidentService);
   notification = inject(NotificationService);
   loading = inject(LoadingService);
 
-
-  hospitalDTO = {
-    id: 0,
-    code: '',
-    name: '',
-    contactNumber: '',
-    city: '',
-    district: '',
-    province: '',
-    areaCovered: '',
-  }
-
-
-  constructor() {
-    effect(() => {
-      const pagination = this.hospitalService.stat()
-      if (pagination) {
-
-      }
-    });
-    effect(() => {
-      const police = this.hospitalService.active()
-      if (police) {
-        this.hospitalDTO.id = police.hospitalId
-        this.hospitalDTO.code = police.hospitalCode
-        this.hospitalDTO.name = police.hospitalName
-        this.hospitalDTO.contactNumber = police.contactNumber
-        this.hospitalDTO.city = police.city
-        this.hospitalDTO.district = police.district
-        this.hospitalDTO.province = police.province
-        this.hospitalDTO.areaCovered = police.coverdArea
-      }
-    });
-  }
 
 
 

@@ -1,12 +1,11 @@
 import {inject, Injectable} from "@angular/core";
 import {APIRequestResources, CachedAPIRequest, LoadingService, PaginationResponse} from "../../../core";
 import {BehaviorSubject, finalize, tap} from "rxjs";
-import {PoliceFind, PoliceStation} from "../../police/interface/police.entity";
 import {toSignal} from "@angular/core/rxjs-interop";
 import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {take} from "rxjs/operators";
-import { IncidentViewDTO} from "../interface/accident.entity";
+import {IncidentGetBYDTO, IncidentViewDTO} from "../interface/accident.entity";
 
 
 @Injectable({
@@ -18,7 +17,7 @@ export class AccidentService extends CachedAPIRequest {
     private readonly $all = new BehaviorSubject<IncidentViewDTO[]>([])
     all = toSignal(this.$all, {initialValue: []})
 
-    private readonly $active = new BehaviorSubject<PoliceStation | undefined>(undefined)
+    private readonly $active = new BehaviorSubject<IncidentGetBYDTO | undefined>(undefined)
     active = toSignal(this.$active, {initialValue: undefined})
 
     private readonly $statistics = new BehaviorSubject<any>(undefined)
@@ -63,7 +62,7 @@ export class AccidentService extends CachedAPIRequest {
     };
 
     getById = (id: string, refresh = true) => {
-        return this.get<PoliceStation>({id}, refresh ? 'freshness' : 'performance')
+        return this.get<IncidentGetBYDTO>({id}, refresh ? 'freshness' : 'performance')
             .pipe(
                 tap((res) => this.$active.next(res.data)),
             )
