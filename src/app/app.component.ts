@@ -9,7 +9,7 @@ import {LoginComponent} from "./core/components/login/login.component";
 
 @Component({
     selector: 'app-root',
-    imports: [RouterOutlet, AppHeaderComponent, DotAnimationComponent, NotificationAlertComponent, LoginComponent],
+    imports: [RouterOutlet, AppHeaderComponent, DotAnimationComponent, NotificationAlertComponent],
     templateUrl: './app.component.html',
     standalone: true,
     styleUrl: './app.component.scss'

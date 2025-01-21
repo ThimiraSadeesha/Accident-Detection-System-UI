@@ -6,6 +6,7 @@ import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {take} from "rxjs/operators";
 import {IncidentGetBYDTO, IncidentViewDTO} from "../interface/accident.entity";
+import {IncidentGetDTO} from "../interface/Incident.entity";
 
 
 @Injectable({
@@ -19,7 +20,7 @@ export class AccidentService extends CachedAPIRequest {
     private readonly $all = new BehaviorSubject<IncidentViewDTO[]>([])
     all = toSignal(this.$all, {initialValue: []})
 
-    private readonly $active = new BehaviorSubject<IncidentGetBYDTO | undefined>(undefined)
+    private readonly $active = new BehaviorSubject<IncidentGetDTO | undefined>(undefined)
     active = toSignal(this.$active, {initialValue: undefined})
 
     private readonly $statistics = new BehaviorSubject<any>(undefined)
@@ -64,7 +65,7 @@ export class AccidentService extends CachedAPIRequest {
     };
 
     getById = (id: string, refresh = true) => {
-        return this.get<IncidentGetBYDTO>({id}, refresh ? 'freshness' : 'performance')
+        return this.get<IncidentGetDTO>({id}, refresh ? 'freshness' : 'performance')
             .pipe(
                 tap((res) => this.$active.next(res.data)),
             )

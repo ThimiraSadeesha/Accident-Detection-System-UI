@@ -7,14 +7,17 @@ import {
     ViewChild
 } from '@angular/core';
 import L from 'leaflet';
-import { FaIconComponent } from "@fortawesome/angular-fontawesome";
-import { ReactiveFormsModule } from "@angular/forms";
-import { AccidentService } from "../../../accident/service/accident.service";
+import {FaIconComponent} from "@fortawesome/angular-fontawesome";
+import {ReactiveFormsModule} from "@angular/forms";
+import {AccidentService} from "../../../accident/service/accident.service";
+import {IncidentGetDTO} from "../../../accident/interface/Incident.entity";
+import {StatusBadgeComponent} from "../status-batch/status-batch.component";
 
 @Component({
     selector: 'app-map',
     imports: [
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        StatusBadgeComponent
     ],
     templateUrl: './map.component.html',
     standalone: true,
@@ -28,6 +31,86 @@ export class MapComponent implements AfterViewInit {
     private readonly DEFAULT_ZOOM = 13;
     private readonly DEFAULT_COORDS: [number, number] = [6.250374, 80.186204];
 
+    emptyIncidentEntityDTO: IncidentGetDTO = {
+        id: -1,
+        severity: '',
+        location: '',
+        incidentTime: '',
+        incidentStatus: '',
+        device: {
+            id: -1,
+            type: '',
+            userId: -1,
+            deviceId: '',
+            vehicleId: -1,
+            deviceStatus: '',
+            lastMaintenance: ''
+        },
+        vehicle: {
+            id: -1,
+            model: '',
+            vehicleType: '',
+            vehicleNumber: '',
+            manufactureYear: ''
+        },
+        user: {
+            id: -1,
+            nic: '',
+            city: '',
+            email: '',
+            gender: '',
+            district: '',
+            fullName: '',
+            province: '',
+            userName: '',
+            userStatus: '',
+            contactNumber: ''
+        },
+        fire: {
+            id: -1,
+            city: '',
+            district: '',
+            fireCode: '',
+            fireName: '',
+            location: '',
+            province: '',
+            areaCovered: '',
+            contactNumber: ''
+        },
+        hospital: {
+            id: -1,
+            city: '',
+            district: '',
+            location: '',
+            province: '',
+            areaCovered: '',
+            hospitalCode: '',
+            hospitalName: '',
+            contactNumber: ''
+        },
+        police: {
+            id: -1,
+            city: '',
+            district: '',
+            location: '',
+            province: '',
+            policeCode: '',
+            policeName: '',
+            areaCovered: '',
+            contactNumber: ''
+        },
+        emergencyPerson: {
+            id: -1,
+            nic: '',
+            email: '',
+            gender: '',
+            address: '',
+            relation: '',
+            personName: '',
+            contactNumber: ''
+        }
+    };
+
     accidentService = inject(AccidentService);
     private map!: L.Map;
     private currentMarker: L.Marker | null = null;
@@ -36,8 +119,11 @@ export class MapComponent implements AfterViewInit {
 
     constructor() {
         effect(() => {
+            // this.incidentGetDTO.pop()
             const accident = this.accidentService.active();
             if (accident?.location) {
+                this.emptyIncidentEntityDTO = accident;
+                console.log(this.emptyIncidentEntityDTO)
                 try {
                     const [latitude, longitude] = accident.location.split(',').map(coord => parseFloat(coord.trim()));
 
@@ -121,6 +207,7 @@ export class MapComponent implements AfterViewInit {
             lng >= -180 &&
             lng <= 180;
     }
+
     close(): void {
         this.accidentService.createModal.set(false)
         this.accidentService.initial()

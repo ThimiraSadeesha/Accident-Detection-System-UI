@@ -55,7 +55,7 @@ export class AppHeaderComponent implements OnInit {
   }
 
   triggerRequestEveryFiveSeconds() {
-    interval(8000)
+    interval(12000)
         .pipe(
             switchMap(() => this.chartService.getNotification(true))
         )
