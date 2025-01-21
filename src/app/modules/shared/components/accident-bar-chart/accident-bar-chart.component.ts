@@ -38,6 +38,7 @@ export class AccidentBarChartComponent {
                         },
                     ],
                 };
+
             }
         });
     }
@@ -55,7 +56,10 @@ export class AccidentBarChartComponent {
 
     public barChartOptions: ChartOptions = {
         responsive: true,
+        maintainAspectRatio: true,
+        aspectRatio: 5,
     };
+
 
     public chartType: 'line' = 'line';
 }
