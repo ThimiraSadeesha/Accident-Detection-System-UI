@@ -122,5 +122,9 @@ export class MapComponent implements AfterViewInit {
             lng >= -180 &&
             lng <= 180;
     }
+    close(): void {
+        this.accidentService.createModal.set(false)
+        this.accidentService.initial()
+    }
 
 }

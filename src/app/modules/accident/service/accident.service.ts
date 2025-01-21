@@ -1,4 +1,4 @@
-import {inject, Injectable} from "@angular/core";
+import {inject, Injectable, signal} from "@angular/core";
 import {APIRequestResources, CachedAPIRequest, LoadingService, PaginationResponse} from "../../../core";
 import {BehaviorSubject, finalize, tap} from "rxjs";
 import {toSignal} from "@angular/core/rxjs-interop";
@@ -13,6 +13,8 @@ import {IncidentGetBYDTO, IncidentViewDTO} from "../interface/accident.entity";
 })
 export class AccidentService extends CachedAPIRequest {
     loading = inject(LoadingService);
+    createModal = signal(false)
+
 
     private readonly $all = new BehaviorSubject<IncidentViewDTO[]>([])
     all = toSignal(this.$all, {initialValue: []})
@@ -66,5 +68,9 @@ export class AccidentService extends CachedAPIRequest {
             .pipe(
                 tap((res) => this.$active.next(res.data)),
             )
+    }
+
+    initial = () => {
+        this.$active.next(undefined)
     }
 }

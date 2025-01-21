@@ -103,7 +103,7 @@ export class IncidentViewComponent {
     }
 
     openUpdateModal(policeId: number) {
-        this.createModal.set(true);
+        this.accidentService.createModal.set(true)
         this.fireId.set(policeId);
         if (policeId > 0) {
             this.updateModal.set(true);
