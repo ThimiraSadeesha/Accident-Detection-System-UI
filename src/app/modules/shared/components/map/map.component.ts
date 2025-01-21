@@ -7,7 +7,7 @@ import {
     ViewChild
 } from '@angular/core';
 import L from 'leaflet';
-import {ReactiveFormsModule} from "@angular/forms";
+import {AbstractControl, ReactiveFormsModule, ValidationErrors} from "@angular/forms";
 import {AccidentService} from "../../../accident/service/accident.service";
 import {IncidentGetDTO} from "../../../accident/interface/Incident.entity";
 import {StatusBadgeComponent} from "../status-batch/status-batch.component";
@@ -211,5 +211,7 @@ export class MapComponent implements AfterViewInit {
         this.accidentService.createModal.set(false)
         this.accidentService.initial()
     }
+
+
 
 }
