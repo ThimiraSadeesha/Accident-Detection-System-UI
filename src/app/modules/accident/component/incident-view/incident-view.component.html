@@ -1,0 +1,198 @@
+<div class="main">
+    <div class="overflow-x-auto">
+        <div class="flex flex-nowrap items-center space-x-2 overflow-x-auto pb-4 bg-white w-full">
+            <div class="relative sm:w-auto">
+                <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                    <svg class="w-4 h-4 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none"
+                         viewBox="0 0 20 20">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+                    </svg>
+                </div>
+                <input type="search" [(ngModel)]="searchParams.city"
+                       class="focus:ring-gray-100 focus:border-gray-300 p-2.5 block w-full pl-10 pr-3 py-2 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50"
+                       placeholder="City">
+            </div>
+
+            <div class="relative sm:w-auto">
+                <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                    <svg class="w-4 h-4 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none"
+                         viewBox="0 0 20 20">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+                    </svg>
+                </div>
+                <input type="search" [(ngModel)]="searchParams.user_name"
+                       class="focus:ring-gray-100 focus:border-gray-300 p-2.5 block w-full pl-10 pr-3 py-2 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50"
+                       placeholder="Full Name">
+            </div>
+            <div class="flex-shrink-0">
+                <button type="submit" class="button-blue  inline-flex items-center whitespace-nowrap"
+                        (click)="fetchPolice()"
+                >
+                    <svg class="w-4  h-5 sm:mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                         viewBox="0 0 20 20">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+                    </svg>
+                    <span class="hidden sm:inline">Search</span>
+                </button>
+            </div>
+
+            <div class="flex-grow"></div>
+
+            <div class="flex-shrink-0 ml-auto">
+                <button type="submit" class="button-blue inline-flex items-center whitespace-nowrap"
+                        (click)="openUpdateModal(0)">Add New Fire
+                </button>
+            </div>
+        </div>
+
+
+        <div class="table-wrapper overflow-x-auto">
+            <table class="table">
+                <thead class="table-thead">
+                <tr>
+                    <th scope="col" class="px-6 py-3">Nic
+                    <th scope="col" class="px-6 py-3">Name
+                    <th scope="col" class="px-6 py-3">Contact Number
+                    <th scope="col" class="px-6 py-3">City
+                    <th scope="col" class="px-6 py-3">District
+                    <th scope="col" class="px-6 py-3">Province
+                    <th scope="col" class="px-6 py-3">Time
+                    <th scope="col" class="px-6 py-3">Incident Status
+                    <th scope="col" class="px-6 py-3">Action
+                </tr>
+
+                </thead>
+                <tbody>
+                    @for (accident of accidentService.all(); track accident.id) {
+                        <tr class="bg-white border-b">
+                            <td class="px-6 py-2 text-sm">{{ accident.nic | titlecase }}
+                            <td class="px-6 py-2 text-sm">{{ accident.fullName | titlecase }}
+                            <td class="px-6 py-2 text-sm">{{ accident.contactNumber }}
+                            <td class="px-6 py-2 text-sm">{{ accident.city | titlecase }}
+                            <td class="px-6 py-2 text-sm">{{ accident.district | titlecase }}
+                            <td class="px-6 py-2 text-sm">{{ accident.province | titlecase }}
+                            <td class="px-6 py-2 text-sm">{{ accident.time | date:'yyyy-MM-dd HH:mm:ss' }}</td>
+                            <td class="px-4 py-3">
+                                <app-status-badge [status]="accident.incidentStatus"></app-status-badge>
+                            </td>
+                            <td class="px-6 py-4">
+                                <svg width="20" height="20" class="cursor-pointer"
+                                     viewBox="0 0 20 20" fill="none" (click)="openUpdateModal(accident.id)"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M11 14H10V10H9M10 6H10.01M19 10C19 11.1819 18.7672 12.3522 18.3149 13.4442C17.8626 14.5361 17.1997 15.5282 16.364 16.364C15.5282 17.1997 14.5361 17.8626 13.4442 18.3149C12.3522 18.7672 11.1819 19 10 19C8.8181 19 7.64778 18.7672 6.55585 18.3149C5.46392 17.8626 4.47177 17.1997 3.63604 16.364C2.80031 15.5282 2.13738 14.5361 1.68508 13.4442C1.23279 12.3522 1 11.1819 1 10C1 7.61305 1.94821 5.32387 3.63604 3.63604C5.32387 1.94821 7.61305 1 10 1C12.3869 1 14.6761 1.94821 16.364 3.63604C18.0518 5.32387 19 7.61305 19 10Z"
+                                          stroke="#28a745" stroke-width="2" stroke-linecap="round"
+                                          stroke-linejoin="round"/>
+                                </svg>
+
+                            </td>
+                        </tr>
+                    } @empty {
+                        <tr class="bg-white border-b">
+                            <td colspan="9" class="px-6 py-10">
+                                <div class="flex flex-col items-center justify-center text-center">
+                                    <p class="text-xl font-semibold text-gray-700 mb-2">No Fire
+                                        Found</p>
+                                    <p class="text-gray-500">We couldn't find any Fire Stations that match
+                                        your search criteria.</p>
+                                    <button (click)="clear() "
+                                            class="mt-4 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition duration-300 ease-in-out">
+                                        Clear Search
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <app-pagination [totalItems]="totalItems()" [itemsPerPage]="itemsPerPage()" (pageChanged)="onPageChange($event)"
+        ></app-pagination>
+    </div>
+</div>
+
+@defer (when createModal) {
+    @if (createModal()) {
+        <div id="crud-modal" tabindex="-1" aria-hidden="true"
+             class="fixed inset-0 z-30 flex justify-center items-center overflow-y-auto bg-gray-900 bg-opacity-50">
+            <div class="bg-white rounded-lg shadow-xl w-[640px] max-h-[90vh] overflow-hidden">
+                <div class="flex items-center justify-between p-4 border-b border-gray-200">
+                    <h2 class="text-lg font-semibold">
+                        @if (updateModal()) {
+                            Edit Fire Station
+                        } @else {
+                            Create New Fire Station
+                        }
+                    </h2>
+                    <button (click)="closeModal()" class="p-2 hover:bg-gray-100 rounded-full">
+                        <fa-icon [icon]="faXmark"></fa-icon>
+                    </button>
+                </div>
+
+                <div class="p-6 overflow-y-auto max-h-[calc(90vh-120px)]">
+                    <div class="space-y-4">
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="relative">
+                                <input type="text" [(ngModel)]="fireDTO.code"
+                                       class="focus:ring-gray-100 focus:border-gray-300 p-2.5 block w-full  text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50"
+                                       placeholder="Fire Code">
+                            </div>
+                            <div class="relative">
+                                <input type="text" [(ngModel)]="fireDTO.name"
+                                       class="focus:ring-gray-100 focus:border-gray-300 p-2.5 block w-full  text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50"
+                                       placeholder="Fire Name">
+                            </div>
+                            <div class="relative">
+                                <input type="text" [(ngModel)]="fireDTO.contactNumber"
+                                       class="focus:ring-gray-100 focus:border-gray-300 p-2.5 block w-full  text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50"
+                                       placeholder="Contact Number">
+                            </div>
+                            <div class="relative">
+                                <input type="text" [(ngModel)]="fireDTO.city"
+                                       class="focus:ring-gray-100 focus:border-gray-300 p-2.5 block w-full  text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50"
+                                       placeholder="City">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="relative">
+                                <input type="text" [(ngModel)]="fireDTO.district"
+                                       class="focus:ring-gray-100 focus:border-gray-300  block w-full  text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50"
+                                       placeholder="District">
+                            </div>
+                            <div class="relative">
+                                <input type="text" [(ngModel)]="fireDTO.province"
+                                       class="focus:ring-gray-100 focus:border-gray-300 p-2.5 block w-full  text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50"
+                                       placeholder="Province">
+                            </div>
+                            <div class="relative">
+                                <input type="text" [(ngModel)]="fireDTO.areaCovered"
+                                       class="focus:ring-gray-100 focus:border-gray-300 p-2.5 block w-full  text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50"
+                                       placeholder="Area">
+                            </div>
+                        </div>
+
+                        <div class="border-t border-gray-200 pt-4 mt-6 flex justify-end gap-3">
+                            <button type="button" (click)="closeModal()"
+                                    class="px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 rounded-lg">
+                                Cancel
+                            </button>
+                            <button (click)="update()"
+                                    class="px-4 py-2 text-sm font-medium text-white bg-green-600 hover:bg-green-700 rounded-lg">
+                                @if (updateModal()) {
+                                    Update Fire
+                                } @else {
+                                    Create Fire
+                                }
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    }
+}
+
