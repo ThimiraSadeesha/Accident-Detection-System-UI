@@ -1,3 +1,4 @@
+import {AccidentService} from "../../modules/accident/service/accident.service";
 
 
 export enum APIRequestResources {
@@ -10,5 +11,6 @@ export enum APIRequestResources {
   PoliceService ='police',
   ChartService ='summary',
   DeviceService ='device',
+  AccidentService ='accident',
 
 }
