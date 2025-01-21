@@ -136,7 +136,7 @@ export class PoliceViewComponent {
                     next: (response) => {
                         this.notification.set({
                             type: 'success',
-                            message: `Failed to update this Police Station successfully`
+                            message: `Updated this Police Station successfully`
                         });
                         this.fetchPolice();
                         this.loading.set(false);

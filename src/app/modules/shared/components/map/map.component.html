@@ -23,13 +23,16 @@
                     <app-status-badge [status]="emptyIncidentEntityDTO.incidentStatus"></app-status-badge>
                 </h2>
                 <div class="flex whitespace-nowrap gap-4">
-                    <button class="p-2.5 px-4 my-4 bg-red-500 rounded right-4 text-white hover:bg-red-600 focus:outline-none">
+                    <button (click)="notify()"
+                            class="p-2.5 px-4 my-4 bg-red-500 rounded right-4 text-white hover:bg-red-600 focus:outline-none">
                         Notify Police
                     </button>
-                    <button class="p-2.5 px-4 my-4 bg-yellow-400 rounded right-4 text-white hover:bg-yellow-600 focus:outline-none">
+                    <button (click)="notify()"
+                            class="p-2.5 px-4 my-4 bg-yellow-400 rounded right-4 text-white hover:bg-yellow-600 focus:outline-none">
                         Notify Fire
                     </button>
-                    <button class="p-2.5 px-4 my-4 bg-blue-600 rounded right-4 text-white hover:bg-blue-700 focus:outline-none">
+                    <button (click)="notify()"
+                            class="p-2.5 px-4 my-4 bg-blue-600 rounded right-4 text-white hover:bg-blue-700 focus:outline-none">
                         Notify Emergency Person
                     </button>
                 </div>

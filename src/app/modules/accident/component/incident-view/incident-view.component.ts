@@ -52,17 +52,6 @@ export class IncidentViewComponent {
         page_number: 1,
     }
 
-    fireDTO = {
-        id: 0,
-        code: '',
-        name: '',
-        contactNumber: '',
-        city: '',
-        district: '',
-        province: '',
-        areaCovered: '',
-    }
-
 
     constructor() {
         effect(() => {
@@ -80,7 +69,7 @@ export class IncidentViewComponent {
     }
 
     fetchPolice() {
-        this.accidentService.find(this.searchParams).subscribe(
+        this.accidentService.find(this.searchParams,true).subscribe(
         )
     }
 
@@ -110,6 +99,8 @@ export class IncidentViewComponent {
         }
 
     }
+
+
 
 
 }
