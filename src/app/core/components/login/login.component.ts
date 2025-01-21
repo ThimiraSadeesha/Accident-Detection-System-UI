@@ -43,19 +43,22 @@ export class LoginComponent {
 
     const credentials = {
       username: this.searchParams.username,
-      password: this.searchParams.password
+      password: this.searchParams.password,
     };
 
     this.chartService.login(credentials).subscribe({
       next: (response) => {
+        localStorage.setItem('authData', JSON.stringify(response));
+
         this.router.navigate(['home']);
       },
       error: (err: any) => {
         console.error(err);
         this.showError = true;
-      }
+      },
     });
   }
+
 
 
 
