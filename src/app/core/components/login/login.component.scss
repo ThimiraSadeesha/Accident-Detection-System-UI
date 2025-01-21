@@ -1,0 +1,29 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+@layer components {
+  .form-input {
+    @apply mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent;
+  }
+
+  .form-checkbox {
+    @apply h-4 w-4 text-green-600 focus:ring-green-500 border-gray-300 rounded;
+  }
+
+  .btn-primary {
+    @apply bg-green-700 text-white py-3 rounded-xl shadow-lg hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2;
+  }
+
+  .form-label {
+    @apply block text-sm font-medium text-gray-700;
+  }
+
+  .checkbox-label {
+    @apply block text-sm text-gray-900;
+  }
+
+  .error-label {
+    @apply block text-sm text-red-500 text-center;
+  }
+}

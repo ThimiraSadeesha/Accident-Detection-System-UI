@@ -1,1 +1,30 @@
-<p>login works!</p>
+<div class="min-h-screen flex items-center justify-center bg-green-50">
+    <div class="bg-white p-10 rounded-2xl shadow-2xl w-full max-w-md">
+        <h2 class="text-3xl font-black text-center text-gray-600 mb-8">Welcome Back</h2>
+        <form (ngSubmit)="onSubmit()">
+            <div class="mb-6">
+                <label for="username" class="form-label">Username</label>
+                <input type="text" id="username" [(ngModel)]="username" name="username" placeholder="Enter your username" required class="form-input">
+            </div>
+            <div class="mb-6">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" id="password" [(ngModel)]="password" name="password" placeholder="Enter your password" required class="form-input">
+            </div>
+            <div *ngIf="showError" class="flex items-center justify-center mb-6">
+                <label class="error-label">Username or Password is Incorrect</label>
+            </div>
+            <div class="flex items-center justify-between mb-6">
+                <div class="flex items-center">
+                    <input id="remember_me" type="checkbox" class="form-checkbox">
+                    <label for="remember_me" class="ml-2 checkbox-label">Remember me</label>
+                </div>
+            </div>
+            <button
+                    type="submit"
+                    [ngClass]="{'animate-shake animate-twice animate-duration-100': showError}"
+                    class="btn-primary w-full">
+                Sign In
+            </button>
+        </form>
+    </div>
+</div>

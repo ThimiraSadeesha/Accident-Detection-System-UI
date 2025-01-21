@@ -6,16 +6,20 @@ import {
     VehiclesViewComponent
 } from "./modules";
 import {HospitalViewComponent} from "./modules/hospital";
+import {LoginComponent} from "./core/components/login/login.component";
 
 
 export const routes: Routes = [
+    {
+        path: 'login',
+        component: LoginComponent,
+
+    },
     {
         path: '',
         redirectTo: 'home',
         pathMatch: 'full'
     },
-
-
     {
         path: 'home',
         component: DashboardViewComponent,
