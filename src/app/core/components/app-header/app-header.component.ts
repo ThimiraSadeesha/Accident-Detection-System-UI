@@ -31,7 +31,7 @@ export class AppHeaderComponent implements OnInit {
   buttons = [
     { label: 'Home', endpoint: 'home', key: 'shipments' },
     { label: 'Accidents', endpoint: 'accident', key: 'accident' },
-    { label: 'Vehicles', endpoint: 'vehicle', key: 'vehicle' },
+    // { label: 'Vehicles', endpoint: 'vehicle', key: 'vehicle' },
     { label: 'Hospitals', endpoint: 'hospital', key: 'hospital' },
     { label: 'Police', endpoint: 'police', key: 'police' },
     { label: 'Fire', endpoint: 'fire', key: 'fire' },
@@ -101,6 +101,6 @@ export class AppHeaderComponent implements OnInit {
   }
 
   logout() {
-
+    this.router.navigate(['login']);
   }
 }

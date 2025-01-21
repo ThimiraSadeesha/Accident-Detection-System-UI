@@ -5,7 +5,6 @@ import {AppHeaderComponent, LoadingService, NotificationService} from "./core";
 import {DotAnimationComponent} from "./core/components/loading/dot-animation/dot-animation.component";
 import {NotificationAlertComponent} from "./core/components/notification/notification-alert.component";
 import {filter, Subscription} from "rxjs";
-import {LoginComponent} from "./core/components/login/login.component";
 
 @Component({
     selector: 'app-root',

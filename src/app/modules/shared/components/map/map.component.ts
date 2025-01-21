@@ -7,7 +7,6 @@ import {
     ViewChild
 } from '@angular/core';
 import L from 'leaflet';
-import {FaIconComponent} from "@fortawesome/angular-fontawesome";
 import {ReactiveFormsModule} from "@angular/forms";
 import {AccidentService} from "../../../accident/service/accident.service";
 import {IncidentGetDTO} from "../../../accident/interface/Incident.entity";
